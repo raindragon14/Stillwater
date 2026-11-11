@@ -99,7 +99,7 @@ class Dataset:
             dates=np.array([d.strftime("%Y-%m-%d") for d in self.dates]),
             tickers=np.array(self.tickers),
             n_windows=np.array(self.n_windows),
-            **{f"idx_{k}": v for k, v in self.idx.items()},
+            **{f"idx_{k}": v for k, v in self.idx.items()},  # type: ignore[arg-type]
         )
 
     @classmethod

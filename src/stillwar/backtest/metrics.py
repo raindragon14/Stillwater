@@ -10,7 +10,7 @@ Every function here has a producer in the pipeline; nothing is computed for its 
 sake.
 """
 
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 from typing import Any
 
 import numpy as np
@@ -31,7 +31,7 @@ __all__ = [
 ]
 
 
-def backtest_metrics(result: BacktestResult) -> dict[str, float]:
+def backtest_metrics(result: Mapping[str, Any]) -> dict[str, float]:
     """Headline performance numbers for one backtest.
 
     Parameters

@@ -187,7 +187,9 @@ def solve_qp(
             "jac": lambda x: a_split,
         },
     ]
-    bounds = [(0.0, w_max) for _ in range(n)] + [(0.0, None) for _ in range(2 * n)]
+    bounds: list[tuple[float, float | None]] = [(0.0, w_max) for _ in range(n)] + [
+        (0.0, None) for _ in range(2 * n)
+    ]
 
     try:
         res = _minimize_slsqp(

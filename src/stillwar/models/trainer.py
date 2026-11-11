@@ -350,10 +350,11 @@ def gate_activations(model_name: str, ds: Dataset, cfg: Config, fit: FitResult) 
         ``(T, N, 3)`` gate activations, or an empty array for ungated models.
     """
     model = build_model(model_name, hidden=cfg.train.hidden_dim)
-    if not hasattr(model, "gates"):
+    gates = getattr(model, "gates", None)
+    if gates is None:
         return np.empty((0, 0, 0))
     model.load_state_dict(fit.weights)
     model.eval()
     x = torch.tensor(ds.inputs(model_name)[ds.idx["test_b"]], dtype=torch.float32)
     with torch.no_grad():
-        return model.gates(x).numpy()
+        return gates(x).numpy()

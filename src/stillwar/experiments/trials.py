@@ -104,8 +104,8 @@ def run_trial_grid(
         ("gmv_unpenalized", base.replace(kappa=0.0), gmv, True),
         ("equal_weight", base, None, True),
     ]
-    for name, params, fc, _ in classical:
-        tasks.append((panel, dates_b, params, fc))
+    for name, params, forecast, _ in classical:
+        tasks.append((panel, dates_b, params, forecast))
         labels.append(name)
 
     results = cache.run_backtests(tasks, workers)

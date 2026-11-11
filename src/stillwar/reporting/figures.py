@@ -23,7 +23,7 @@ from collections.abc import Sequence
 from dataclasses import dataclass
 from datetime import date as Date
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal, cast
 
 import matplotlib
 
@@ -35,6 +35,7 @@ from matplotlib.lines import Line2D  # noqa: E402
 from matplotlib.patches import FancyArrowPatch, FancyBboxPatch, Patch  # noqa: E402
 
 from stillwar.backtest.metrics import trigger_endpoints  # noqa: E402
+from stillwar.optimization.kkt import KKTLog  # noqa: E402
 from stillwar.provenance.metadata import read_json  # noqa: E402
 
 __all__ = [
@@ -205,13 +206,13 @@ def _panel_label(ax: plt.Axes, letter: str, title: str = "") -> None:
     ax.set_title(text, loc="left", fontsize=matplotlib.rcParams["font.size"], pad=4)
 
 
-def _light_grid(ax: plt.Axes, axis: str = "y") -> None:
+def _light_grid(ax: plt.Axes, axis: Literal["x", "y", "both"] = "y") -> None:
     """Dashed light grid behind the data (print-safe, never dominant)."""
     ax.grid(axis=axis, color=_GRID, linestyle="--", linewidth=0.5)
     ax.set_axisbelow(True)
 
 
-def plot_architecture(out_path: str | Path = FIG_DIR / "figS1_architecture.png") -> None:
+def plot_architecture(out_path: str | Path = FIG_DIR / "figS1_architecture.png") -> list[Path]:
     """Draw the end-to-end pipeline schematic (manuscript Figure 1).
 
     Parameters
@@ -316,7 +317,7 @@ def plot_kkt_spread(
     kkt_log: Sequence[dict[str, Any]],
     band: float,
     out_path: str | Path = FIG_DIR / "fig1_kkt_spread.png",
-) -> None:
+) -> list[Path]:
     """Plot the gradient spread against the no-trade band (manuscript Figure 2).
 
     Interior dates are drawn as markers only. A connecting line would interpolate
@@ -424,7 +425,7 @@ def plot_triggers(
     kkt_log: Sequence[dict[str, Any]],
     tickers: Sequence[str],
     out_path: str | Path = FIG_DIR / "fig2_trigger_decomposition.png",
-) -> None:
+) -> list[Path]:
     """Plot the sector and constituent trigger decomposition (manuscript Figure 3).
 
     The caption promises that the bars "decompose extreme sell and buy gradient
@@ -448,7 +449,7 @@ def plot_triggers(
     endpoints and the 10-of-66 concentration of ``BRPT.JK`` cannot disagree with
     the prose in Section 3.5.
     """
-    endpoints = trigger_endpoints(kkt_log, tickers)
+    endpoints = trigger_endpoints(cast(Sequence[KKTLog], kkt_log), tickers)
     grand = endpoints["sell_total"] + endpoints["buy_total"]
 
     sectors = sorted(
@@ -518,7 +519,7 @@ def plot_sensitivity(
     shrinkage: dict[str, Any],
     volatility: dict[str, Any],
     out_path: str | Path = FIG_DIR / "figS2_sensitivity.png",
-) -> None:
+) -> list[Path]:
     """Plot the three structural extensions (manuscript Figure 4).
 
     The caption fixes the panel count: (A) cap-drift forced trades against optimal

@@ -59,7 +59,7 @@ def select_universe(cfg: Config) -> list[str]:
         year_frame = frame.loc[str(year)]
         if len(year_frame) >= 150:
             liquidity[ticker] = float((year_frame["Close"] * year_frame["Volume"]).median())
-    ranked = sorted(liquidity, key=liquidity.get, reverse=True)
+    ranked = sorted(liquidity, key=lambda ticker: liquidity[ticker], reverse=True)
     if len(ranked) < cfg.data.n_stocks:
         raise RuntimeError(f"only {len(ranked)} eligible tickers")
     return ranked[: cfg.data.n_stocks]

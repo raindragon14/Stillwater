@@ -209,6 +209,7 @@ def run_backtest(
                 vol_scale = sig_t / mean_sig if mean_sig > 1e-8 else np.ones(n_assets)
             eta_b_t, eta_s_t = params.penalty_vectors(n_assets, vol_scale)
 
+            assert forecasts is not None
             y_hat = forecasts[r_idx]
             mu_raw = np.expm1(y_hat) if params.log_forecast else np.array(y_hat, dtype=float)
             mu_shrunk = (1.0 - params.alpha) * mu_raw + params.alpha * float(np.mean(mu_raw))
