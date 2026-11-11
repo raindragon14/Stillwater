@@ -4,8 +4,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from stillwar.config import BacktestParams
-from stillwar.provenance import cache
+from stillwater.config import BacktestParams
+from stillwater.provenance import cache
 
 
 @pytest.fixture(autouse=True)

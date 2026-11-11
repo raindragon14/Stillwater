@@ -6,9 +6,9 @@ import numpy as np
 import pytest
 import torch
 
-from stillwar.config import load_config
-from stillwar.models import MSGN, LogSigInc, LSTMBaseline, MLPBaseline
-from stillwar.provenance.artifacts import MODEL_KEYS
+from stillwater.config import load_config
+from stillwater.models import MSGN, LogSigInc, LSTMBaseline, MLPBaseline
+from stillwater.provenance.artifacts import MODEL_KEYS
 from tests.helpers import needs
 
 EXPECTED_PARAMS = {"logsig": 923, "logsig_inc": 353, "mlp": 1505, "lstm": 4513}
@@ -72,7 +72,7 @@ def test_baseline_forecasts(repo_root: Path) -> None:
 @needs("data/processed/forecasts_baselines.npz")
 def test_hist_mv_matches_its_formula(repo_root: Path) -> None:
     """The stored Hist-MV array equals the formula in :meth:`Dataset.historical_forecast`."""
-    from stillwar.features import load_dataset
+    from stillwater.features import load_dataset
 
     cfg = load_config(repo_root / "configs/base.yaml")
     ds = load_dataset(cfg)

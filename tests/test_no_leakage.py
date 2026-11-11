@@ -3,8 +3,8 @@
 import numpy as np
 import pandas as pd
 
-from stillwar.config import load_config
-from stillwar.features import build_dataset, logsig_features, split_indices
+from stillwater.config import load_config
+from stillwater.features import build_dataset, logsig_features, split_indices
 
 
 def test_feature_strict_historical_window() -> None:
@@ -30,7 +30,7 @@ def test_target_execution_lag_on_real_data(repo_root) -> None:
     that a discarded argument had no effect, which tested nothing. This one reads the
     pipeline's own dataset and reconstructs the target from the panel.
     """
-    from stillwar.data import load_panel
+    from stillwater.data import load_panel
 
     cfg = load_config(repo_root / "configs/base.yaml")
     panel = load_panel(cfg)
@@ -46,7 +46,7 @@ def test_target_execution_lag_on_real_data(repo_root) -> None:
 
 def test_standardisation_uses_training_rows_only(repo_root) -> None:
     """Feature moments come from the training partition, so test data cannot leak in."""
-    from stillwar.data import load_panel
+    from stillwater.data import load_panel
 
     cfg = load_config(repo_root / "configs/base.yaml")
     ds = build_dataset(load_panel(cfg), cfg)

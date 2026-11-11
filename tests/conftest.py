@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from stillwar.config import Config, load_config
+from stillwater.config import Config, load_config
 from tests.helpers import REPO_ROOT
 
 

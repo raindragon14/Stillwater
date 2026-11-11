@@ -17,7 +17,7 @@ Open items before submission. The full draft audit is preserved in Git history
    manuscript reports alpha vs EW and per-seed means/s.d.; compute the missing
    statistics if the journal requires them.
 6. **Repository URL.** The code/data release is
-   `https://github.com/raindragon14/Stillwar` (`v1.0.0`). Update it if the manuscript
+   `https://github.com/raindragon14/Stillwater` (`v2.0.0`). Update it if the manuscript
    repository is published under a different name.
 7. **Reference [20].** Still an SSRN working paper; check for a later journal version
    before submission.

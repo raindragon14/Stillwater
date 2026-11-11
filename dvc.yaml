@@ -1,28 +1,28 @@
-# DVC pipeline for the Stillwar reproducibility stages.
+# DVC pipeline for the Stillwater reproducibility stages.
 #
 # Install the optional pipeline extra and initialise DVC once:
 #   uv sync --extra pipeline
 #   uv run dvc init
 #   uv run dvc repro
 #
-# The custom content-addressed cache in src/stillwar/provenance/cache.py remains the
+# The custom content-addressed cache in src/stillwater/provenance/cache.py remains the
 # fast path used by `make`; DVC adds standard `dvc.lock` lineage and remote storage.
 stages:
   features:
-    cmd: uv run python -m stillwar features
+    cmd: uv run python -m stillwater features
     deps:
       - data/raw
-      - src/stillwar/features
-      - src/stillwar/data
+      - src/stillwater/features
+      - src/stillwater/data
       - configs/base.yaml
     outs:
       - .cache/dataset
 
   train:
-    cmd: uv run python -m stillwar train
+    cmd: uv run python -m stillwater train
     deps:
       - .cache/dataset
-      - src/stillwar/models
+      - src/stillwater/models
       - configs/base.yaml
     outs:
       - models/checkpoints
@@ -32,25 +32,25 @@ stages:
       - data/processed/forecasts_lstm.npz
 
   baselines:
-    cmd: uv run python -m stillwar baselines
+    cmd: uv run python -m stillwater baselines
     deps:
       - .cache/dataset
-      - src/stillwar/features
+      - src/stillwater/features
       - configs/base.yaml
     outs:
       - data/processed/forecasts_baselines.npz
 
   simulate:
-    cmd: uv run python -m stillwar simulate
+    cmd: uv run python -m stillwater simulate
     deps:
       - data/processed/forecasts_logsig.npz
       - data/processed/forecasts_logsig_inc.npz
       - data/processed/forecasts_mlp.npz
       - data/processed/forecasts_lstm.npz
       - data/processed/forecasts_baselines.npz
-      - src/stillwar/experiments
-      - src/stillwar/backtest
-      - src/stillwar/optimization
+      - src/stillwater/experiments
+      - src/stillwater/backtest
+      - src/stillwater/optimization
       - configs/base.yaml
     outs:
       - data/processed/table1.json
@@ -61,11 +61,11 @@ stages:
       - data/processed/gate_weights.json
 
   experiments:
-    cmd: uv run python -m stillwar experiments
+    cmd: uv run python -m stillwater experiments
     deps:
       - data/processed/forecasts_logsig.npz
       - data/processed/forecasts_baselines.npz
-      - src/stillwar/experiments
+      - src/stillwater/experiments
       - configs/base.yaml
     outs:
       - data/processed/exp_unconstrained_tolerance.json
@@ -73,23 +73,23 @@ stages:
       - data/processed/exp_volatility_penalty.json
 
   figures:
-    cmd: uv run python -m stillwar figures
+    cmd: uv run python -m stillwater figures
     deps:
       - data/processed/table1.json
       - data/processed/table2.json
       - data/processed/table3.json
       - data/processed/kkt_log.json
       - data/processed/phase4.json
-      - src/stillwar/reporting
+      - src/stillwater/reporting
     outs:
       - reports/figures
 
   trials:
-    cmd: uv run python -m stillwar trials
+    cmd: uv run python -m stillwater trials
     deps:
       - data/processed/forecasts_logsig.npz
       - data/processed/forecasts_baselines.npz
-      - src/stillwar/experiments
+      - src/stillwater/experiments
       - configs/base.yaml
     outs:
       - data/processed/trials.json

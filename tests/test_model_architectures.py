@@ -9,7 +9,7 @@ Verifies exact match with ``docs/JOURNAL.md`` Sections 2.4 and 2.8:
 
 import torch
 
-from stillwar.models import MSGN, LogSigInc, LSTMBaseline, MLPBaseline
+from stillwater.models import MSGN, LogSigInc, LSTMBaseline, MLPBaseline
 
 
 def count_params(model: torch.nn.Module) -> int:

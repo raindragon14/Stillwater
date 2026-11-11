@@ -4,9 +4,9 @@ from pathlib import Path
 
 import pytest
 
-from stillwar.cli import ALL_STAGES, STAGES
-from stillwar.config import Config, load_config
-from stillwar.provenance.artifacts import MODEL_KEYS
+from stillwater.cli import ALL_STAGES, STAGES
+from stillwater.config import Config, load_config
+from stillwater.provenance.artifacts import MODEL_KEYS
 
 
 def test_every_stage_is_reachable() -> None:
@@ -24,7 +24,7 @@ def test_checkpoint_paths_match_between_writer_and_reader(repo_root: Path) -> No
     The previous layout wrote ``logsig/logsig_seed_0.pt`` while the tests read
     ``logsig/msgn_seed_0.pt``, so a retrain produced a tree no test ever inspected.
     """
-    from stillwar.models.trainer import train_all_models
+    from stillwater.models.trainer import train_all_models
 
     source = Path(train_all_models.__code__.co_filename).read_text(encoding="utf-8")
     assert 'f"{name}_seed_{seed}.pt"' in source
@@ -35,7 +35,7 @@ def test_checkpoint_paths_match_between_writer_and_reader(repo_root: Path) -> No
 
 def test_forecast_artifact_names_are_consistent(repo_root: Path) -> None:
     """``train`` writes ``forecasts_<model>.npz`` for exactly the models ``simulate`` loads."""
-    from stillwar.cli import stage_train
+    from stillwater.cli import stage_train
 
     source = Path(stage_train.__code__.co_filename).read_text(encoding="utf-8")
     assert 'f"forecasts_{key}.npz"' in source
@@ -51,7 +51,7 @@ def test_config_has_no_duplicated_defaults(repo_root: Path) -> None:
     source = "\n".join(
         path.read_text(encoding="utf-8")
         for package in ("optimization", "backtest")
-        for path in sorted((repo_root / "src" / "stillwar" / package).glob("*.py"))
+        for path in sorted((repo_root / "src" / "stillwater" / package).glob("*.py"))
     )
     assert "get_param" not in source
     assert "**kwargs" not in source
@@ -65,7 +65,7 @@ def test_backtest_params_cover_every_trading_field(cfg: Config) -> None:
     """
     from dataclasses import fields
 
-    from stillwar.config import BacktestParams
+    from stillwater.config import BacktestParams
 
     names = {f.name for f in fields(BacktestParams)}
     trading = set(cfg.trading.model_dump())

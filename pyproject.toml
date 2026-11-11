@@ -1,5 +1,5 @@
 [project]
-name = "stillwar"
+name = "stillwater"
 version = "2.0.0"
 description = "Reproducible order-2 log-signature return forecasting and multiplier-free KKT no-trade diagnostics for IDX equities"
 readme = "README.md"
@@ -17,7 +17,7 @@ keywords = [
     "idx",
 ]
 classifiers = [
-    "Development Status :: 5 - Production/Stable",
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Science/Research",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3.14",
@@ -66,7 +66,13 @@ pipeline = [
 ]
 
 [project.scripts]
-stillwar = "stillwar.cli:main"
+stillwater = "stillwater.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/raindragon14/Stillwater"
+Repository = "https://github.com/raindragon14/Stillwater"
+Documentation = "https://github.com/raindragon14/Stillwater/blob/main/docs/ARCHITECTURE.md"
+Changelog = "https://github.com/raindragon14/Stillwater/blob/main/CHANGELOG.md"
 
 [build-system]
 requires = ["setuptools>=68.0"]
@@ -74,10 +80,10 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["stillwar*"]
+include = ["stillwater*"]
 
 [tool.setuptools.package-data]
-stillwar = ["py.typed"]
+stillwater = ["py.typed"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src", "."]
@@ -89,7 +95,7 @@ markers = [
 ]
 
 [tool.coverage.run]
-source = ["stillwar"]
+source = ["stillwater"]
 omit = ["tests/*"]
 
 [tool.coverage.report]
@@ -111,7 +117,7 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 "tests/*" = ["D", "B", "SIM"]
-"src/stillwar/__init__.py" = ["D"]
+"src/stillwater/__init__.py" = ["D"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "numpy"

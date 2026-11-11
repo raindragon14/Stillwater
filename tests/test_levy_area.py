@@ -3,7 +3,7 @@
 import numpy as np
 import pytest
 
-from stillwar.features import compute_increments_and_levy_areas, logsig_features
+from stillwater.features import compute_increments_and_levy_areas, logsig_features
 
 
 def test_straight_line_zero_levy_area() -> None:

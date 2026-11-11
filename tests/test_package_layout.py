@@ -11,16 +11,16 @@ import importlib
 import pytest
 
 PACKAGES = (
-    "stillwar.config",
-    "stillwar.data",
-    "stillwar.features",
-    "stillwar.models",
-    "stillwar.optimization",
-    "stillwar.backtest",
-    "stillwar.experiments",
-    "stillwar.reporting",
-    "stillwar.provenance",
-    "stillwar.cli",
+    "stillwater.config",
+    "stillwater.data",
+    "stillwater.features",
+    "stillwater.models",
+    "stillwater.optimization",
+    "stillwater.backtest",
+    "stillwater.experiments",
+    "stillwater.reporting",
+    "stillwater.provenance",
+    "stillwater.cli",
 )
 
 
@@ -31,8 +31,8 @@ def test_package_imports(name: str) -> None:
 
 
 def test_cli_wrapper_points_at_cli_module() -> None:
-    """``python -m stillwar`` and the console script share one implementation."""
-    from stillwar import __main__, cli
+    """``python -m stillwater`` and the console script share one implementation."""
+    from stillwater import __main__, cli
 
     assert __main__.main is cli.main
     assert __main__.STAGES is cli.STAGES

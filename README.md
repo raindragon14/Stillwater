@@ -1,20 +1,22 @@
-# When the Optimizer Refuses to Trade
+# Stillwater
 
-Reproducible code and manuscript for **“When the Optimizer Refuses to Trade: A KKT
-No-Trade Zone and Lévy-Area Signal Activation under Weak Signals in LQ45 Equities”**.
+> **When the Optimizer Refuses to Trade: A KKT No-Trade Zone and Lévy-Area Signal
+> Activation under Weak Signals in LQ45 Equities**
 
-Muhammad Reihan Pandanarang — Mathematics Department,
-Universitas Negeri Semarang.
+Reproducible code and manuscript. Muhammad Reihan Pandanarang —
+Mathematics Department, Universitas Negeri Semarang.
+
+**Status:** research code, v2.0.0. Not production trading software.
 
 The repository contains both the empirical pipeline and the paper:
 
 | Path | Purpose |
 |:--|:--|
-| [`src/stillwar/`](src/stillwar/) | Modular Python package (data, features, models, optimization, backtest, reporting) |
+| [`src/stillwater/`](src/stillwater/) | Modular Python package (data, features, models, optimization, backtest, reporting) |
 | [`docs/JOURNAL.md`](docs/JOURNAL.md) | Complete manuscript; Tables 1–3 are generated from the artifacts |
 | [`docs/REVISION_NOTES.md`](docs/REVISION_NOTES.md) | Open author decisions before submission |
 | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Package map, dependency order and invariants |
-| [`docs/REPRODUCIBILITY.md`](docs/REPRODUCIBILITY.md) | What is guaranteed, what changed, and what is outstanding |
+| [`docs/REPRODUCIBILITY.md`](docs/REPRODUCIBILITY.md) | Environment, data, pipeline, determinism and known limits |
 | [`configs/base.yaml`](configs/base.yaml) | Single source of truth for every number |
 | [`data/raw/`](data/raw/) | Archived Yahoo Finance snapshot + SHA-256 manifest |
 | [`data/processed/`](data/processed/) | Provenance-stamped result artifacts (Tables 1–3, KKT log, trials) |
@@ -24,7 +26,7 @@ The repository contains both the empirical pipeline and the paper:
 
 ```bash
 uv sync --extra dev          # Python 3.14, CPU torch, test/lint tools
-uv run python -m stillwar verify
+uv run python -m stillwater verify
 make all                     # verify -> features -> train -> baselines -> simulate -> experiments -> figures -> tables -> test
 ```
 
@@ -37,7 +39,7 @@ make trials                  # about 20 minutes, once
 ```
 
 > `make` is a convenience wrapper. On Windows without GNU make, run the same stages
-> directly with `uv run python -m stillwar <stage>`; every stage accepts `--config`,
+> directly with `uv run python -m stillwater <stage>`; every stage accepts `--config`,
 > `--set SECTION__KEY=VALUE` and `--force`.
 
 Quality gates:
@@ -62,13 +64,13 @@ make test
 | `figures` | Render the manuscript figures |
 | `tables` | Regenerate Tables 1–3 and sync `docs/JOURNAL.md` |
 
-`python -m stillwar <stage>` is the low-level entry point; `make` is the convenience
+`python -m stillwater <stage>` is the low-level entry point; `make` is the convenience
 wrapper.
 
 ## Modular layout
 
 ```text
-src/stillwar/
+src/stillwater/
 ├── config/        # frozen Pydantic schema, YAML loader, BacktestParams
 ├── data/          # universe, Yahoo ingestion, manifest, adjusted panel
 ├── features/      # log-signature, Levy areas, standardised dataset, splits
@@ -79,11 +81,11 @@ src/stillwar/
 ├── reporting/     # JSON -> Markdown tables, JSON -> figures, manuscript sync
 ├── provenance/    # metadata, forecast contracts, content-addressed cache
 ├── cli.py         # stage dispatcher
-└── __main__.py    # `python -m stillwar` wrapper
+└── __main__.py    # `python -m stillwater` wrapper
 ```
 
-The package is the public API; `stillwar.cli` orchestrates the stages and
-`stillwar.__main__` is the `python -m stillwar` wrapper. There are no top-level
+The package is the public API; `stillwater.cli` orchestrates the stages and
+`stillwater.__main__` is the `python -m stillwater` wrapper. There are no top-level
 compatibility modules left.
 
 ## Reproducibility
@@ -127,10 +129,17 @@ Open author decisions are listed in [`docs/REVISION_NOTES.md`](docs/REVISION_NOT
 | `qp` | cvxpy as an independent QP cross-check |
 | `pipeline` | DVC for `dvc repro` lineage |
 
+## Release
+
+- Changelog: [`CHANGELOG.md`](CHANGELOG.md)
+- Release checklist: [`docs/RELEASE.md`](docs/RELEASE.md)
+- Security policy: [`SECURITY.md`](SECURITY.md)
+- Code of conduct: [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md)
+
 ## Citation
 
 See [`CITATION.cff`](CITATION.cff). The code release is archived at
-[`raindragon14/Stillwar`](https://github.com/raindragon14/Stillwar).
+[`raindragon14/Stillwater`](https://github.com/raindragon14/Stillwater).
 
 ## License
 

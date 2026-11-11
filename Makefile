@@ -1,7 +1,7 @@
-# Makefile for the Stillwar reproducibility pipeline.
+# Makefile for the Stillwater reproducibility pipeline.
 #
 # `make all` regenerates every table and figure from the raw snapshot. Expensive
-# stages are content-addressed (see src/stillwar/provenance/cache.py), so a second
+# stages are content-addressed (see src/stillwater/provenance/cache.py), so a second
 # `make all` on an unchanged tree only re-renders tables and figures. Use
 # `make all FORCE=1` to recompute everything.
 .PHONY: all help setup verify ingest features train baselines simulate experiments figures tables trials test lint format typecheck manuscript check clean
@@ -21,7 +21,7 @@ SETARG = $(if $(SET),--set $(SET),)
 export PYTHONPATH := src$(if $(PYTHONPATH),:$(PYTHONPATH))
 
 help:
-	@echo "Stillwar reproducibility pipeline:"
+	@echo "Stillwater reproducibility pipeline:"
 	@echo "  make all         - verify, features, train, baselines, simulate, experiments, figures, tables, test"
 	@echo "  make setup       - install the package and dev dependencies"
 	@echo "  make verify      - verify the SHA-256 data manifest"
@@ -52,34 +52,34 @@ setup:
 	uv sync --extra dev
 
 verify:
-	$(PYTHON) -m stillwar verify $(FORCEARG) --config $(CONFIG) $(SETARG)
+	$(PYTHON) -m stillwater verify $(FORCEARG) --config $(CONFIG) $(SETARG)
 
 ingest:
-	$(PYTHON) -m stillwar ingest $(FORCEARG) --config $(CONFIG) $(SETARG)
+	$(PYTHON) -m stillwater ingest $(FORCEARG) --config $(CONFIG) $(SETARG)
 
 features:
-	$(PYTHON) -m stillwar features $(FORCEARG) --config $(CONFIG) $(SETARG)
+	$(PYTHON) -m stillwater features $(FORCEARG) --config $(CONFIG) $(SETARG)
 
 train:
-	$(PYTHON) -m stillwar train $(FORCEARG) --config $(CONFIG) $(SETARG)
+	$(PYTHON) -m stillwater train $(FORCEARG) --config $(CONFIG) $(SETARG)
 
 baselines:
-	$(PYTHON) -m stillwar baselines $(FORCEARG) --config $(CONFIG) $(SETARG)
+	$(PYTHON) -m stillwater baselines $(FORCEARG) --config $(CONFIG) $(SETARG)
 
 simulate:
-	$(PYTHON) -m stillwar simulate $(FORCEARG) --config $(CONFIG) $(SETARG)
+	$(PYTHON) -m stillwater simulate $(FORCEARG) --config $(CONFIG) $(SETARG)
 
 experiments:
-	$(PYTHON) -m stillwar experiments $(FORCEARG) --config $(CONFIG) $(SETARG)
+	$(PYTHON) -m stillwater experiments $(FORCEARG) --config $(CONFIG) $(SETARG)
 
 trials:
-	$(PYTHON) -m stillwar trials $(FORCEARG) --config $(CONFIG) $(SETARG)
+	$(PYTHON) -m stillwater trials $(FORCEARG) --config $(CONFIG) $(SETARG)
 
 figures:
-	$(PYTHON) -m stillwar figures --config $(CONFIG) $(SETARG)
+	$(PYTHON) -m stillwater figures --config $(CONFIG) $(SETARG)
 
 tables:
-	$(PYTHON) -m stillwar tables --config $(CONFIG) $(SETARG)
+	$(PYTHON) -m stillwater tables --config $(CONFIG) $(SETARG)
 
 lint:
 	$(RUFF) check src tests
@@ -88,7 +88,7 @@ format:
 	$(RUFF) format src tests
 
 typecheck:
-	$(MYPY) src/stillwar
+	$(MYPY) src/stillwater
 
 manuscript:
 	$(PYTHON) tools/check_manuscript.py

@@ -4,8 +4,8 @@ title: "When the Optimizer Refuses to Trade: A KKT No-Trade Zone and Lévy-Area 
 version: 2.0.0
 date-released: 2026-11-11
 license: MIT
-repository-code: "https://github.com/raindragon14/Stillwar"
-url: "https://github.com/raindragon14/Stillwar"
+repository-code: "https://github.com/raindragon14/Stillwater"
+url: "https://github.com/raindragon14/Stillwater"
 keywords:
   - reproducible research
   - portfolio optimization

@@ -13,7 +13,7 @@ files must stay consistent. The checks below are cheap; run them before every re
 ## Data
 
 - `data/raw/` is the archived Yahoo Finance snapshot; `data/raw/manifest.sha256`
-  records every file's SHA-256. `python -m stillwar verify` checks it before any panel
+  records every file's SHA-256. `python -m stillwater verify` checks it before any panel
   is built.
 - Missing or suspended stock-days carry the last adjusted price forward and set volume
   to zero; they are never filled from later dates.
@@ -72,7 +72,7 @@ files must stay consistent. The checks below are cheap; run them before every re
 
 ```bash
 uv sync --extra dev
-uv run python -m stillwar verify
+uv run python -m stillwater verify
 make all                 # main pipeline
 make trials              # 1,225-trial DSR grid, once
 make check               # ruff + pytest + manuscript check

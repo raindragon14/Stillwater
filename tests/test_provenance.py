@@ -5,8 +5,8 @@ from pathlib import Path
 
 import pytest
 
-from stillwar.provenance.metadata import artifact_metadata, code_digest, read_json, write_json
-from stillwar.reporting.tables import (
+from stillwater.provenance.metadata import artifact_metadata, code_digest, read_json, write_json
+from stillwater.reporting.tables import (
     load_blocks,
     render_table1,
     render_table2,
@@ -164,7 +164,7 @@ def test_golden_artifact_values(repo_root: Path) -> None:
 
     Floats are compared with a relative tolerance of ``1e-6`` so that a different BLAS
     or SciPy build does not fail the suite over a last-bit difference. Regenerate with
-    ``python -m stillwar tables --bless`` after an intentional change.
+    ``python -m stillwater tables --bless`` after an intentional change.
     """
     golden_path = repo_root / "tests" / "golden_values.json"
     if not golden_path.exists():

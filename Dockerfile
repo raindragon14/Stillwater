@@ -1,11 +1,11 @@
-# Reproducible CPU image for the Stillwar pipeline.
+# Reproducible CPU image for the Stillwater pipeline.
 #
 # Build:
-#   docker build -t stillwar:2.0.0 .
+#   docker build -t stillwater:2.0.0 .
 # Run the integrity check:
-#   docker run --rm stillwar:2.0.0
+#   docker run --rm stillwater:2.0.0
 # Run the full pipeline (needs the raw snapshot, which is copied in):
-#   docker run --rm stillwar:2.0.0 python -m stillwar all
+#   docker run --rm stillwater:2.0.0 python -m stillwater all
 FROM python:3.14-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -33,4 +33,4 @@ RUN uv sync --frozen --no-dev
 
 ENV PATH="/app/.venv/bin:$PATH"
 
-CMD ["python", "-m", "stillwar", "verify"]
+CMD ["python", "-m", "stillwater", "verify"]

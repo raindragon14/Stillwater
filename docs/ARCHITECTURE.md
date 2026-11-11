@@ -1,7 +1,7 @@
 # Architecture
 
 The package is organised by **responsibility**, not by file type. A module may import
-only from packages below it in the dependency order. `stillwar.cli` is the only
+only from packages below it in the dependency order. `stillwater.cli` is the only
 orchestrator; no package imports the CLI.
 
 ## Dependency order
@@ -25,16 +25,16 @@ that single edge. `reporting` reads artifacts; it never re-simulates.
 
 | Package | Responsibility | Key modules |
 |:--|:--|:--|
-| `stillwar.config` | Frozen Pydantic schema, YAML loading, backtest parameters | `schema.py`, `loader.py`, `params.py` |
-| `stillwar.data` | Universe, Yahoo ingestion, SHA-256 manifest, aligned adjusted panel | `universe.py`, `ingest.py`, `panel.py` |
-| `stillwar.features` | Order-2 log-signature, Levy areas, standardised dataset, purged splits | `logsig.py`, `dataset.py` |
-| `stillwar.models` | MSGN/LogSig-Inc/MLP/LSTM, composite loss, deterministic trainer | `architectures.py`, `loss.py`, `trainer.py` |
-| `stillwar.optimization` | Ledoit-Wolf covariance, Theorem 1 KKT test, SLSQP QP | `covariance.py`, `kkt.py`, `qp.py` |
-| `stillwar.backtest` | Execution loop, costs, drift, metrics, statistics | `engine.py`, `metrics.py`, `stats.py` |
-| `stillwar.experiments` | Table 1-3 runs, sensitivity grids, 1,225-trial DSR grid | `simulate.py`, `sensitivity.py`, `trials.py` |
-| `stillwar.reporting` | JSON -> Markdown tables, JSON -> figures, manuscript sync | `tables.py`, `figures.py` |
-| `stillwar.provenance` | Artifact metadata, forecast contracts, content-addressed cache | `metadata.py`, `artifacts.py`, `cache.py` |
-| `stillwar.cli` | Stage dispatcher (`python -m stillwar <stage>`) | `cli.py` |
+| `stillwater.config` | Frozen Pydantic schema, YAML loading, backtest parameters | `schema.py`, `loader.py`, `params.py` |
+| `stillwater.data` | Universe, Yahoo ingestion, SHA-256 manifest, aligned adjusted panel | `universe.py`, `ingest.py`, `panel.py` |
+| `stillwater.features` | Order-2 log-signature, Levy areas, standardised dataset, purged splits | `logsig.py`, `dataset.py` |
+| `stillwater.models` | MSGN/LogSig-Inc/MLP/LSTM, composite loss, deterministic trainer | `architectures.py`, `loss.py`, `trainer.py` |
+| `stillwater.optimization` | Ledoit-Wolf covariance, Theorem 1 KKT test, SLSQP QP | `covariance.py`, `kkt.py`, `qp.py` |
+| `stillwater.backtest` | Execution loop, costs, drift, metrics, statistics | `engine.py`, `metrics.py`, `stats.py` |
+| `stillwater.experiments` | Table 1-3 runs, sensitivity grids, 1,225-trial DSR grid | `simulate.py`, `sensitivity.py`, `trials.py` |
+| `stillwater.reporting` | JSON -> Markdown tables, JSON -> figures, manuscript sync | `tables.py`, `figures.py` |
+| `stillwater.provenance` | Artifact metadata, forecast contracts, content-addressed cache | `metadata.py`, `artifacts.py`, `cache.py` |
+| `stillwater.cli` | Stage dispatcher (`python -m stillwater <stage>`) | `cli.py` |
 
 ## Pipeline stages
 
