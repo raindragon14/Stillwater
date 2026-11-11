@@ -1,0 +1,206 @@
+{
+  "AALI.JK": {
+    "file": "AALI.JK.csv",
+    "sha256": "a26c8d645093c8273bd90f6c890fa563ec140441f34e2fb147e4125edb962120"
+  },
+  "ADHI.JK": {
+    "file": "ADHI.JK.csv",
+    "sha256": "fcc7c6304ff24722dd2082204b286c7867b07bab44a939a459eaed06438016dc"
+  },
+  "ADRO.JK": {
+    "file": "ADRO.JK.csv",
+    "sha256": "efd17932e0b28df8eb0d764e677b5f3bac1097ed0b6582a6753b89c8ff1a9418"
+  },
+  "AKRA.JK": {
+    "file": "AKRA.JK.csv",
+    "sha256": "9c2efd82c6819e68b7bd788dff6a9f34a6d289528514f5ad612e82f81eca8cb6"
+  },
+  "ANTM.JK": {
+    "file": "ANTM.JK.csv",
+    "sha256": "9b71a68781c68a3377d53f7236fd209c68a6857984afff58c8f4899b96456560"
+  },
+  "ASII.JK": {
+    "file": "ASII.JK.csv",
+    "sha256": "fb3026403aa18fa3ed8e88a8f4a83f96aa844e9f477a2c6360ae3ae9f8aff60c"
+  },
+  "ASRI.JK": {
+    "file": "ASRI.JK.csv",
+    "sha256": "00f6b9a89550c8a77d835624fe6c3c3457271377716a8f2899c43d89cb66e66c"
+  },
+  "BBCA.JK": {
+    "file": "BBCA.JK.csv",
+    "sha256": "2ee862130cfc63acf7993b2d262209007b0a8b9461586b08049c6abb3e170347"
+  },
+  "BBNI.JK": {
+    "file": "BBNI.JK.csv",
+    "sha256": "dd4518cdbe81492e15535ae0bb61a6a5aa9d1babb4a1d0b2f356d5a5e0b4d5f9"
+  },
+  "BBRI.JK": {
+    "file": "BBRI.JK.csv",
+    "sha256": "922806a13b0190407ae7bdc49d5949a9126d1f4fe90a6744b1a8dc2f3d865dfd"
+  },
+  "BBTN.JK": {
+    "file": "BBTN.JK.csv",
+    "sha256": "4b31f2002e97f54df08b2c4a8bbdbaecd0b997a42bdbdc83a58abc8d63bed2b8"
+  },
+  "BDMN.JK": {
+    "file": "BDMN.JK.csv",
+    "sha256": "d003eaac56b65e8f6db2e9446799cdf8fb2b8c6be1308400a8507d60c857280d"
+  },
+  "BKSL.JK": {
+    "file": "BKSL.JK.csv",
+    "sha256": "43ec58e05b4ae39d6c2ebc5e82f71ad29de1f5f89040c176ebdecdb8413a7289"
+  },
+  "BMRI.JK": {
+    "file": "BMRI.JK.csv",
+    "sha256": "7b0045ef494738b4f1407b1caeceb17e19e745fdc0e95c86d706e7ee82c0ace7"
+  },
+  "BMTR.JK": {
+    "file": "BMTR.JK.csv",
+    "sha256": "310d3d9d4eca1c8785767516d4c882d6145666ecaf1f58d710c7d44ad31e3915"
+  },
+  "BRPT.JK": {
+    "file": "BRPT.JK.csv",
+    "sha256": "3d0f5fbca758319ae1392953b12f2c457cdde09a4abdc36bdab3dc772b631d3e"
+  },
+  "BSDE.JK": {
+    "file": "BSDE.JK.csv",
+    "sha256": "39304d8982a63f2086913ac4309595e7a3828e9d5e1eb0e284244871c3d7ff81"
+  },
+  "CPIN.JK": {
+    "file": "CPIN.JK.csv",
+    "sha256": "c6d4476e3a9936cee314fba85bdcbdb984666f29330c95899a304f5961a061d9"
+  },
+  "ELSA.JK": {
+    "file": "ELSA.JK.csv",
+    "sha256": "7515180c575a05e1730683198f98db604dd44c8fbf94128f1cde9e3ad81ff91e"
+  },
+  "EXCL.JK": {
+    "file": "EXCL.JK.csv",
+    "sha256": "aab8128474003ee07ae0dd7bac38717dd2a78222ab3a4cac9d78c046084358a6"
+  },
+  "GGRM.JK": {
+    "file": "GGRM.JK.csv",
+    "sha256": "a255fac46f9c6752f7ea1dd86336da96954ce936e93b078ccaad533e8cb44e06"
+  },
+  "HMSP.JK": {
+    "file": "HMSP.JK.csv",
+    "sha256": "c7545c9baf11c729ae4f973979bd2f8f275492b52bca0355a15d758b30ca7689"
+  },
+  "ICBP.JK": {
+    "file": "ICBP.JK.csv",
+    "sha256": "2ce8e1808c0e7e3b776f71f9269be6b7735d648b8b2aed35b655351d21892769"
+  },
+  "INCO.JK": {
+    "file": "INCO.JK.csv",
+    "sha256": "6564d03e488dfa4c0ec614432b1d3bf14aff89fc8f3800b3c0c56f1046065872"
+  },
+  "INDF.JK": {
+    "file": "INDF.JK.csv",
+    "sha256": "da55f1dac843f0583129baf2a1677ab7d959f8ee3d7e006c43bb4b425866e31a"
+  },
+  "INDY.JK": {
+    "file": "INDY.JK.csv",
+    "sha256": "7e78378d0be00fc37f7e9f1f61866f145dab90c69c2d78cbc095b95984d71cff"
+  },
+  "INKP.JK": {
+    "file": "INKP.JK.csv",
+    "sha256": "722849bf05c83683a96720935d545e07822e5f5c6a70130f59a7a3fd636990f7"
+  },
+  "INTP.JK": {
+    "file": "INTP.JK.csv",
+    "sha256": "148e2ec6b8688b9066ef98dc7394f16c47dbdf7a63ada2758dd8f1c3846875b3"
+  },
+  "ITMG.JK": {
+    "file": "ITMG.JK.csv",
+    "sha256": "3f39d98f71931677d2c1e355bb330e85a756da3f54c48ab44849b961c58e9764"
+  },
+  "JSMR.JK": {
+    "file": "JSMR.JK.csv",
+    "sha256": "7b235bb5c8751958981247db42d6cbf16539a11a60954ad192a0fa9c0e0e88b3"
+  },
+  "KLBF.JK": {
+    "file": "KLBF.JK.csv",
+    "sha256": "07e962087569de5b67ef566038e070b59ab68cac300712d3c840b78164b194ed"
+  },
+  "LPKR.JK": {
+    "file": "LPKR.JK.csv",
+    "sha256": "b15ef4c5f1603e271a7bfe78288a0305631798f2da28cd01cc5a5caf78d73157"
+  },
+  "LPPF.JK": {
+    "file": "LPPF.JK.csv",
+    "sha256": "add2954b7d16440a25fd25391a2d0901e530ebe63e97b60f9173c3e9cf75f506"
+  },
+  "LSIP.JK": {
+    "file": "LSIP.JK.csv",
+    "sha256": "7b7a2ab7478bda51579787a58b7f77edb5cfd156b16ea32cdf38e7795291e88a"
+  },
+  "MEDC.JK": {
+    "file": "MEDC.JK.csv",
+    "sha256": "dbadbeca05e77e091f51c522378beb56f76dbde7834fd40e678677bcdd084e1a"
+  },
+  "MNCN.JK": {
+    "file": "MNCN.JK.csv",
+    "sha256": "97fefca78b286e5be437bcf9d261c33057b0bdc445db4f3e8da2d4ff5c803f3b"
+  },
+  "MYOR.JK": {
+    "file": "MYOR.JK.csv",
+    "sha256": "dc196d3ec340cb777d8371c0861498cb10ab96e5b23f5390f35798f4c73cd94c"
+  },
+  "PGAS.JK": {
+    "file": "PGAS.JK.csv",
+    "sha256": "91ecc78b4521b6de3b69ce1102153d344bd935af62087952ac3465ead9d6196c"
+  },
+  "PTBA.JK": {
+    "file": "PTBA.JK.csv",
+    "sha256": "876a693c69835709f75bf0371e0575515e6d08bd5ac9c6d84780017c6912b151"
+  },
+  "PTPP.JK": {
+    "file": "PTPP.JK.csv",
+    "sha256": "410c6af560399d93e28609cd819455122df6d3a202152854d2ce0d77874935c8"
+  },
+  "PWON.JK": {
+    "file": "PWON.JK.csv",
+    "sha256": "c8e010a676c3eac7455b9b11c55b5b5b99a54e2bf3c4a2f04cdbbdcc0e69407f"
+  },
+  "SCMA.JK": {
+    "file": "SCMA.JK.csv",
+    "sha256": "8786a756eeb9aace97d305dff92591784f835fec250c2ba508d819992eea5c8a"
+  },
+  "SMGR.JK": {
+    "file": "SMGR.JK.csv",
+    "sha256": "2626ea6a18f66a3c54c62dddcd8746c147b202fcd0445ee8b16d1e8a470119b5"
+  },
+  "SSMS.JK": {
+    "file": "SSMS.JK.csv",
+    "sha256": "bdab57358bdf34a1d4833bfb88e1a93ffb69061f8790a1c9ce92cb2589b699c1"
+  },
+  "TBIG.JK": {
+    "file": "TBIG.JK.csv",
+    "sha256": "2993bb2e02269e85dc2942417b450d379cdeb8b85b18a7cacb449535eac711d6"
+  },
+  "TLKM.JK": {
+    "file": "TLKM.JK.csv",
+    "sha256": "5fc4d28f3076897d4c6d46b1335260e8302fbafb317cb174e8749f830ccbaca1"
+  },
+  "TPIA.JK": {
+    "file": "TPIA.JK.csv",
+    "sha256": "2d895cd9bc1426e7f76033272382ed1c0be9a042d980e8abaacbc8225481c336"
+  },
+  "UNTR.JK": {
+    "file": "UNTR.JK.csv",
+    "sha256": "2ea44d1db42fb6e930af75ad3d300b03edd818151262c584d59baf2a490828cf"
+  },
+  "UNVR.JK": {
+    "file": "UNVR.JK.csv",
+    "sha256": "a2b0413dee516427f311b54a0a31f1f5889b97630d97fc4bda10ee7d9bb8e663"
+  },
+  "WIKA.JK": {
+    "file": "WIKA.JK.csv",
+    "sha256": "789fbee74798cc95746ea091079bbb63efa9021becf64b96648c76c5534af7b9"
+  },
+  "WTON.JK": {
+    "file": "WTON.JK.csv",
+    "sha256": "7052962cbe83f74b03bbecec982617a3d13aca68789d1c2f029a15f0ac437a00"
+  }
+}

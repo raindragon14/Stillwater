@@ -1,0 +1,20 @@
+{
+  "metadata": {
+    "config_digest": "97eb03ab42ec",
+    "code_digest": "e6ff4f412b61e777",
+    "git_sha": "05c29a3278f9661e16bf7fec1f6331a3eec19bd1",
+    "git_dirty": true,
+    "versions": {
+      "python": "3.14.4",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "torch": "2.15.0+cpu"
+    },
+    "created_utc": "2026-11-08T14:29:09Z"
+  },
+  "results": {
+    "omega_5": 0.34191960096359253,
+    "omega_20": 0.35521170496940613,
+    "omega_60": 0.3028686046600342
+  }
+}

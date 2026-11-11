@@ -157,8 +157,9 @@ We first establish how weak the signal is. Table 1 reports the mean rank IC of e
 
 **Table 1. Out-of-sample performance, Panels A and B (learned models: mean ± s.d. over five seeds; classical strategies are point estimates)**
 
+<!-- BEGIN TABLE 1 -->
 | Strategy | Net CAGR | Sharpe | MDD | Turnover | Rank IC | NW alpha vs EW | Deflated Sharpe |
-| --- | --- | --- | --- | --- | --- | --- | --- |
+|:---|---:|---:|---:|---:|---:|---:|---:|
 | **Panel A (test 2024–2025)** |  |  |  |  |  |  |  |
 | LogSig | 23.59% ± 6.85% | 0.74 ± 0.23 | 28.10% ± 6.36% | 20.36% ± 2.22% | +0.0224 ± 0.0188 | +9.35% (t=1.37) | 0.2802 |
 | LogSig-Inc | 19.58% ± 7.85% | 0.63 ± 0.29 | 24.92% ± 4.56% | 17.41% ± 7.72% | +0.0044 ± 0.0213 | +6.46% (t=0.79) | 0.2301 |
@@ -179,6 +180,7 @@ We first establish how weak the signal is. Table 1 reports the mean rank IC of e
 | GMV | -1.66% | -0.27 | 32.89% | 0.00% | – | -1.73% (t=-0.71) | 0.0108 |
 | EW | 0.11% | -0.19 | 30.20% | 3.64% | – | – | 0.0154 |
 | GMV, unpenalized (supplementary) | -3.33% | -0.56 | 23.39% | 22.60% | – | -3.71% (t=-0.89) | 0.0028 |
+<!-- END TABLE 1 -->
 
 *Notes:* Turnover is the mean per-rebalance two-sided executed turnover (a weekly rate, not annualized). Rank IC is the cross-sectional Spearman correlation on weekly rebalance dates; NW alpha is annualized against EW; the deflated Sharpe ratio uses all $M = 1{,}225$ trials. Classical strategies are single runs and therefore have no cross-seed standard deviation.
 
@@ -226,8 +228,9 @@ Table 2 varies one setting at a time around the primary configuration ($\gamma =
 
 **Table 2. Sensitivity of LogSig to $\kappa$, $\gamma$ and the cost level, one setting varied at a time (seed means), Panel A (test 2024–2025)**
 
-| Setting | Net CAGR | Sharpe | MDD | Turnover | $\mathbf{\psi}_{\mathbf{\kappa}}$ | $\mathbf{\psi}_{\mathbf{\kappa}}^{\mathbf{0}}$ |
-| --- | --- | --- | --- | --- | --- | --- |
+<!-- BEGIN TABLE 2 -->
+| Setting | Net CAGR | Sharpe | MDD | Turnover | $\psi_{\kappa}$ | $\psi_{\kappa}^{0}$ |
+|:---|---:|---:|---:|---:|---:|---:|
 | $\kappa = 0$ (no penalty) | 9.46% | 0.18 | 34.69% | 133.53% | 100.00% | 100.00% |
 | $\kappa = 1$ | 12.50% | 0.30 | 31.79% | 84.66% | 100.00% | 11.70% |
 | $\kappa = 2.5$ | 14.09% | 0.39 | 32.27% | 44.48% | 96.22% | 0.00% |
@@ -239,6 +242,7 @@ Table 2 varies one setting at a time around the primary configuration ($\gamma =
 | $m = 0.5$ | 16.68% | 0.49 | 31.46% | 44.48% | 96.22% | – |
 | $m = 2$ | 24.35% | 0.79 | 26.21% | 6.19% | 25.79% | – |
 | Non-inclusive costs ($c_{b} = 0.001933$, $c_{s} = 0.002933$) | 25.73% | 0.83 | 27.47% | 15.43% | 58.95% | – |
+<!-- END TABLE 2 -->
 
 *Notes:* $\psi_{\kappa}$ and $\psi_{\kappa}^{0}$ are interior feasible activation rates; $\psi_{\kappa}^{0}$ is reported only for the $\kappa$ rows, where the risk-only benchmark is run.
 
@@ -362,10 +366,12 @@ Table 3 cross-tabulates the verdict of Theorem 1 against the solver's trade deci
 
 **Table 3. Agreement between the verdict of Theorem 1 and the solver's trade decision (primary Panel B LogSig run, 128 rebalance dates)**
 
+<!-- BEGIN TABLE 3 -->
 | Theorem 1 verdict | Solver traded | Solver held | Total |
-| --- | --- | --- | --- |
-| Trade ($\Delta g_{t} > \eta_{b} + \eta_{s}$) | 33 | 0 | 33 |
+|:---|---:|---:|---:|
+| Trade ($\Delta g_{t} \gt \eta_{b} + \eta_{s}$) | 33 | 0 | 33 |
 | Hold ($\Delta g_{t} \leq \eta_{b} + \eta_{s}$) | 0 | 20 | 20 |
-| Boundary (margin below $10^{- 6}$) | 0 | 0 | 0 |
+| Boundary (margin below $10^{-6}$) | 0 | 0 | 0 |
 | Not applicable (cap-drift: $w^{-}$ infeasible for (5)) | 75 | 0 | 75 |
 | **Total** | 108 | 20 | 128 |
+<!-- END TABLE 3 -->

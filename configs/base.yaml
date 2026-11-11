@@ -1,0 +1,64 @@
+# Single source of truth for every experiment; see docs/JOURNAL.md Sections 2.1-2.10.
+# Nothing downstream may define a default that is absent here.
+seeds: [0, 1, 2, 3, 4]
+
+data:
+  raw_dir: data/raw
+  manifest: data/raw/manifest.sha256
+  start: "2017-01-02"
+  end: "2026-10-02"
+  n_stocks: 40
+  ranking_year: 2017
+
+splits:  # inclusive date ranges; purge_days trims train/val tails, embargo_days trims val/test heads
+  train: ["2018-03-28", "2023-06-30"]
+  val: ["2023-07-03", "2023-12-29"]
+  test_a: ["2024-01-02", "2025-12-30"]
+  test_b: ["2024-01-02", "2026-10-02"]
+  purge_days: 6
+  embargo_days: 6
+
+features:
+  windows: [5, 20, 60]
+  horizon_days: 5
+  execution_lag: 1  # target = log(P[t+1+h] / P[t+1])
+
+trading:
+  rebalance_freq: 5
+  c_b: 0.0015
+  c_s: 0.0025
+  kappa: 5.0       # turnover penalty scale, eta = kappa * c
+  gamma: 2.5       # risk aversion
+  w_max: 0.15
+  alpha: 0.5       # cross-sectional forecast shrinkage
+  cov_lookback: 60
+  rf_annual: 0.06
+  turnover_tol: 1.0e-4
+  boundary_tol: 1.0e-6
+  log_forecast: true       # forecasts are 5-day log returns (false: simple returns)
+  volatility_scaled: false
+  short_circuit: true      # skip the QP when Theorem 1 says hold (equivalence is tested)
+  cap_drift_buffer: 0.0    # epsilon: pre-trade drift tolerated above w_max (Section 3.7)
+
+# Process counts. They affect wall clock only, never results.
+workers:
+  train: 3      # an LSTM fit holds roughly 400 MB of backpropagation state
+  backtest: 5   # a backtest holds roughly 50 MB
+
+reporting:
+  panel_a_rebalances: 94        # Panel A = first 94 rebalance cycles of the continuous run
+  effective_ratio_weekly: 1.0   # non-overlapping weekly labels: df = n_reb - 1
+  effective_ratio_daily: 0.2    # overlapping 5-day labels: df = n/5 - 1
+
+train:
+  hidden_dim: 16
+  weight_decay: 1.0e-4
+  batch_size: 32
+  max_epochs: 30
+  patience: 8
+  lambda_rank: 1.0
+  lrs:             # learning-rate grid per model, selected on the first seed by validation score S
+    logsig: [1.0e-3, 3.0e-4]
+    logsig_inc: [1.0e-3]
+    mlp: [1.0e-3, 3.0e-4]
+    lstm: [1.0e-3]

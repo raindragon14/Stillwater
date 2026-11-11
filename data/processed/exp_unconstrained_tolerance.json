@@ -1,0 +1,205 @@
+{
+  "metadata": {
+    "config_digest": "97eb03ab42ec",
+    "code_digest": "2b241176f52dc3ef",
+    "git_sha": "870f93a21d0f58ab4b65cbcc1d5ade3a90e4b2fe",
+    "git_dirty": false,
+    "versions": {
+      "python": "3.14.4",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "torch": "2.15.0+cpu"
+    },
+    "created_utc": "2026-11-09T03:42:30Z"
+  },
+  "results": {
+    "unconstrained": {
+      "panel_b": {
+        "cagr": {
+          "mean": 0.1112795425829601,
+          "sd": 0.2130182320934947,
+          "n": 5
+        },
+        "sharpe": {
+          "mean": 0.3350643444192692,
+          "sd": 0.3703897456072984,
+          "n": 5
+        },
+        "mdd": {
+          "mean": 0.621332348485058,
+          "sd": 0.09369499541347766,
+          "n": 5
+        },
+        "turnover": {
+          "mean": 0.5494468498584417,
+          "sd": 0.07896023059189079,
+          "n": 5
+        }
+      },
+      "max_weight_mean": 0.5497643906363254,
+      "hhi_mean": 0.44148215554662695
+    },
+    "tolerance_grid": {
+      "w_max_0.15_eps_0.000": {
+        "w_max": 0.15,
+        "epsilon": 0.0,
+        "cap_drift_mean": 87.6,
+        "signal_trade_mean": 29.6,
+        "optimal_hold_mean": 10.8,
+        "cap_drift_share": 0.684375,
+        "signal_trade_share": 0.23125,
+        "optimal_hold_share": 0.084375,
+        "panel_b": {
+          "cagr": 0.06635970292464792,
+          "sharpe": 0.1526790240556569,
+          "mdd": 0.35605704958618656,
+          "turnover": 0.23081306204493748
+        }
+      },
+      "w_max_0.15_eps_0.005": {
+        "w_max": 0.15,
+        "epsilon": 0.005,
+        "cap_drift_mean": 53.4,
+        "signal_trade_mean": 54.2,
+        "optimal_hold_mean": 20.4,
+        "cap_drift_share": 0.4171875,
+        "signal_trade_share": 0.4234375,
+        "optimal_hold_share": 0.159375,
+        "panel_b": {
+          "cagr": 0.06628172531749324,
+          "sharpe": 0.1523672155891568,
+          "mdd": 0.35585501706838213,
+          "turnover": 0.22983820699336027
+        }
+      },
+      "w_max_0.15_eps_0.010": {
+        "w_max": 0.15,
+        "epsilon": 0.01,
+        "cap_drift_mean": 31.2,
+        "signal_trade_mean": 71.8,
+        "optimal_hold_mean": 25.0,
+        "cap_drift_share": 0.24375,
+        "signal_trade_share": 0.5609375,
+        "optimal_hold_share": 0.1953125,
+        "panel_b": {
+          "cagr": 0.0659590675093104,
+          "sharpe": 0.1512752341260468,
+          "mdd": 0.3554266553522577,
+          "turnover": 0.22950318268550912
+        }
+      },
+      "w_max_0.15_eps_0.020": {
+        "w_max": 0.15,
+        "epsilon": 0.02,
+        "cap_drift_mean": 11.4,
+        "signal_trade_mean": 86.0,
+        "optimal_hold_mean": 30.6,
+        "cap_drift_share": 0.0890625,
+        "signal_trade_share": 0.671875,
+        "optimal_hold_share": 0.2390625,
+        "panel_b": {
+          "cagr": 0.061670378918240745,
+          "sharpe": 0.13661666079947546,
+          "mdd": 0.35638177374257046,
+          "turnover": 0.2280569700892387
+        }
+      },
+      "w_max_0.15_eps_0.050": {
+        "w_max": 0.15,
+        "epsilon": 0.05,
+        "cap_drift_mean": 0.8,
+        "signal_trade_mean": 94.2,
+        "optimal_hold_mean": 33.0,
+        "cap_drift_share": 0.00625,
+        "signal_trade_share": 0.7359375,
+        "optimal_hold_share": 0.2578125,
+        "panel_b": {
+          "cagr": 0.0649603616996346,
+          "sharpe": 0.14752340606059955,
+          "mdd": 0.35563487553565076,
+          "turnover": 0.2275283489980348
+        }
+      },
+      "w_max_0.20_eps_0.000": {
+        "w_max": 0.2,
+        "epsilon": 0.0,
+        "cap_drift_mean": 77.2,
+        "signal_trade_mean": 36.4,
+        "optimal_hold_mean": 14.4,
+        "cap_drift_share": 0.603125,
+        "signal_trade_share": 0.284375,
+        "optimal_hold_share": 0.1125,
+        "panel_b": {
+          "cagr": 0.08853991571787775,
+          "sharpe": 0.23447670335580795,
+          "mdd": 0.38794789564935983,
+          "turnover": 0.27416593235651743
+        }
+      },
+      "w_max_0.20_eps_0.005": {
+        "w_max": 0.2,
+        "epsilon": 0.005,
+        "cap_drift_mean": 49.4,
+        "signal_trade_mean": 56.0,
+        "optimal_hold_mean": 22.6,
+        "cap_drift_share": 0.3859375,
+        "signal_trade_share": 0.4375,
+        "optimal_hold_share": 0.1765625,
+        "panel_b": {
+          "cagr": 0.09000125035012023,
+          "sharpe": 0.2387848862340732,
+          "mdd": 0.38786713382744076,
+          "turnover": 0.2733841043275733
+        }
+      },
+      "w_max_0.20_eps_0.010": {
+        "w_max": 0.2,
+        "epsilon": 0.01,
+        "cap_drift_mean": 33.2,
+        "signal_trade_mean": 68.6,
+        "optimal_hold_mean": 26.2,
+        "cap_drift_share": 0.259375,
+        "signal_trade_share": 0.5359375,
+        "optimal_hold_share": 0.2046875,
+        "panel_b": {
+          "cagr": 0.08975933513751391,
+          "sharpe": 0.2380738355761578,
+          "mdd": 0.3874191791076514,
+          "turnover": 0.27286217630691817
+        }
+      },
+      "w_max_0.20_eps_0.020": {
+        "w_max": 0.2,
+        "epsilon": 0.02,
+        "cap_drift_mean": 15.2,
+        "signal_trade_mean": 83.2,
+        "optimal_hold_mean": 29.6,
+        "cap_drift_share": 0.11875,
+        "signal_trade_share": 0.65,
+        "optimal_hold_share": 0.23125,
+        "panel_b": {
+          "cagr": 0.08782074745812626,
+          "sharpe": 0.23243181942494595,
+          "mdd": 0.3877004779533934,
+          "turnover": 0.27247845998111997
+        }
+      },
+      "w_max_0.20_eps_0.050": {
+        "w_max": 0.2,
+        "epsilon": 0.05,
+        "cap_drift_mean": 1.8,
+        "signal_trade_mean": 93.8,
+        "optimal_hold_mean": 32.4,
+        "cap_drift_share": 0.0140625,
+        "signal_trade_share": 0.7328125,
+        "optimal_hold_share": 0.253125,
+        "panel_b": {
+          "cagr": 0.08841490401948185,
+          "sharpe": 0.23414363230207078,
+          "mdd": 0.3878745720791693,
+          "turnover": 0.2717890358889809
+        }
+      }
+    }
+  }
+}

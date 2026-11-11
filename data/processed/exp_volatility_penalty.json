@@ -1,0 +1,193 @@
+{
+  "metadata": {
+    "config_digest": "97eb03ab42ec",
+    "code_digest": "2b241176f52dc3ef",
+    "git_sha": "870f93a21d0f58ab4b65cbcc1d5ade3a90e4b2fe",
+    "git_dirty": false,
+    "versions": {
+      "python": "3.14.4",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "torch": "2.15.0+cpu"
+    },
+    "created_utc": "2026-11-09T03:42:30Z"
+  },
+  "results": {
+    "uniform": {
+      "panel_b": {
+        "cagr": 0.06635970292464792,
+        "sharpe": 0.1526790240556569,
+        "mdd": 0.35605704958618656,
+        "turnover": 0.23081306204493748
+      },
+      "triggers": {
+        "crossing_count": 33,
+        "total_triggers": 66.0,
+        "herfindahl_constituents": 0.06014692378328742,
+        "herfindahl_sectors": 0.1965105601469238,
+        "sector_shares": {
+          "Infrastructures": 0.16666666666666666,
+          "Financials": 0.12121212121212122,
+          "Consumer Discretionary": 0.09090909090909091,
+          "Industrials": 0.0,
+          "Consumer Non-Cyclicals": 0.12121212121212122,
+          "Basic Materials": 0.3484848484848485,
+          "Utilities": 0.015151515151515152,
+          "Energy": 0.06060606060606061,
+          "Properties & Real Estate": 0.07575757575757576,
+          "Healthcare": 0.0
+        },
+        "top_10_constituents": [
+          {
+            "ticker": "BRPT.JK",
+            "count": 10,
+            "share": 0.15151515151515152,
+            "sector": "Basic Materials"
+          },
+          {
+            "ticker": "BBTN.JK",
+            "count": 6,
+            "share": 0.09090909090909091,
+            "sector": "Financials"
+          },
+          {
+            "ticker": "WIKA.JK",
+            "count": 5,
+            "share": 0.07575757575757576,
+            "sector": "Infrastructures"
+          },
+          {
+            "ticker": "TPIA.JK",
+            "count": 5,
+            "share": 0.07575757575757576,
+            "sector": "Basic Materials"
+          },
+          {
+            "ticker": "ANTM.JK",
+            "count": 3,
+            "share": 0.045454545454545456,
+            "sector": "Basic Materials"
+          },
+          {
+            "ticker": "LPKR.JK",
+            "count": 3,
+            "share": 0.045454545454545456,
+            "sector": "Properties & Real Estate"
+          },
+          {
+            "ticker": "SSMS.JK",
+            "count": 3,
+            "share": 0.045454545454545456,
+            "sector": "Consumer Non-Cyclicals"
+          },
+          {
+            "ticker": "INCO.JK",
+            "count": 2,
+            "share": 0.030303030303030304,
+            "sector": "Basic Materials"
+          },
+          {
+            "ticker": "LPPF.JK",
+            "count": 2,
+            "share": 0.030303030303030304,
+            "sector": "Consumer Discretionary"
+          },
+          {
+            "ticker": "HMSP.JK",
+            "count": 2,
+            "share": 0.030303030303030304,
+            "sector": "Consumer Non-Cyclicals"
+          }
+        ]
+      }
+    },
+    "volatility_scaled": {
+      "panel_b": {
+        "cagr": 0.10594177216225006,
+        "sharpe": 0.2735007590607072,
+        "mdd": 0.36098804744916047,
+        "turnover": 0.22564508629385532
+      },
+      "triggers": {
+        "crossing_count": 24,
+        "total_triggers": 48.0,
+        "herfindahl_constituents": 0.05381944444444445,
+        "herfindahl_sectors": 0.1779513888888889,
+        "sector_shares": {
+          "Infrastructures": 0.2708333333333333,
+          "Financials": 0.08333333333333333,
+          "Consumer Discretionary": 0.10416666666666667,
+          "Industrials": 0.0,
+          "Consumer Non-Cyclicals": 0.14583333333333334,
+          "Basic Materials": 0.22916666666666666,
+          "Utilities": 0.020833333333333332,
+          "Energy": 0.10416666666666667,
+          "Properties & Real Estate": 0.041666666666666664,
+          "Healthcare": 0.0
+        },
+        "top_10_constituents": [
+          {
+            "ticker": "WIKA.JK",
+            "count": 6,
+            "share": 0.125,
+            "sector": "Infrastructures"
+          },
+          {
+            "ticker": "BBTN.JK",
+            "count": 4,
+            "share": 0.08333333333333333,
+            "sector": "Financials"
+          },
+          {
+            "ticker": "INTP.JK",
+            "count": 3,
+            "share": 0.0625,
+            "sector": "Basic Materials"
+          },
+          {
+            "ticker": "MEDC.JK",
+            "count": 3,
+            "share": 0.0625,
+            "sector": "Energy"
+          },
+          {
+            "ticker": "LPPF.JK",
+            "count": 3,
+            "share": 0.0625,
+            "sector": "Consumer Discretionary"
+          },
+          {
+            "ticker": "BRPT.JK",
+            "count": 3,
+            "share": 0.0625,
+            "sector": "Basic Materials"
+          },
+          {
+            "ticker": "TPIA.JK",
+            "count": 2,
+            "share": 0.041666666666666664,
+            "sector": "Basic Materials"
+          },
+          {
+            "ticker": "EXCL.JK",
+            "count": 2,
+            "share": 0.041666666666666664,
+            "sector": "Infrastructures"
+          },
+          {
+            "ticker": "TLKM.JK",
+            "count": 2,
+            "share": 0.041666666666666664,
+            "sector": "Infrastructures"
+          },
+          {
+            "ticker": "SSMS.JK",
+            "count": 2,
+            "share": 0.041666666666666664,
+            "sector": "Consumer Non-Cyclicals"
+          }
+        ]
+      }
+    }
+  }
+}

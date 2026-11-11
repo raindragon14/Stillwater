@@ -1,34 +1,46 @@
+# Python
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info/
+
+# Environments & caches
+.venv/
+.uv-cache/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.cache/
+.dsh-office-*/
+.pytest-tmp/
+pytest-tmp-*/
+pytest-cache-files-*/
+.acl-recovery/
+.tmp/
+
+# Intermediate data & binary arrays
+data/interim/
+data/processed/*.npz
+data/processed/checkpoints_*/
+data/processed/*_cache.json
+*.tmp
+*.log
+
 # Generated manuscript binaries. docs/JOURNAL.md is the source of truth;
 # the DOCX/PDF are rebuilt from it with the target journal's template.
 /docs/JOURNAL.docx
 /docs/*.docx
 /docs/*.pdf
-
-# Office lock/temporary files
 ~$*.docx
 ~$*.doc
 ~$*.xlsx
 ~$*.pptx
 
-# OS cruft
+# System & IDE
 .DS_Store
 Thumbs.db
 desktop.ini
-
-# Python
-__pycache__/
-*.py[cod]
-.venv/
-venv/
-.pytest_cache/
-.ruff_cache/
-*.egg-info/
-build/
-dist/
-
-# Local pipeline artifacts (code, data and models live in the replication repo)
-data/raw/
-data/processed/
-models/
-.cache/
-reports/
+.idea/
+.vscode/

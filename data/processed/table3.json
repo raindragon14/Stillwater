@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "config_digest": "97eb03ab42ec",
+    "code_digest": "69f55368815632c4",
+    "git_sha": "870f93a21d0f58ab4b65cbcc1d5ade3a90e4b2fe",
+    "git_dirty": false,
+    "versions": {
+      "python": "3.14.4",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "torch": "2.15.0+cpu"
+    },
+    "created_utc": "2026-11-09T03:42:28Z"
+  },
+  "results": {
+    "trade_traded": 33,
+    "trade_held": 0,
+    "hold_traded": 0,
+    "hold_held": 20,
+    "boundary_traded": 0,
+    "boundary_held": 0,
+    "cap_drift_traded": 75,
+    "cap_drift_held": 0,
+    "trade_total": 33,
+    "hold_total": 20,
+    "boundary_count": 0,
+    "cap_drift_count": 75,
+    "total_solver_traded": 108,
+    "total_solver_held": 20,
+    "total_dates": 128
+  }
+}
