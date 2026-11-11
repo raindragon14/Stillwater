@@ -25,6 +25,7 @@ COPY configs ./configs
 COPY data/raw ./data/raw
 COPY tests ./tests
 COPY docs ./docs
+COPY reports/figures ./reports/figures
 COPY tools ./tools
 COPY Makefile ./
 

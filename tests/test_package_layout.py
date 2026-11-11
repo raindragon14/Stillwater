@@ -37,16 +37,3 @@ def test_cli_wrapper_points_at_cli_module() -> None:
     assert __main__.main is cli.main
     assert __main__.STAGES is cli.STAGES
     assert __main__.ALL_STAGES is cli.ALL_STAGES
-
-
-def test_legacy_shims_reexport_public_names() -> None:
-    """The pre-refactor import paths still resolve to the new implementations."""
-    from stillwar.backtest.engine import run_backtest
-    from stillwar.optimization import evaluate_kkt, solve_qp
-    from stillwar.portfolio import evaluate_kkt as legacy_evaluate_kkt
-    from stillwar.portfolio import run_backtest as legacy_run_backtest
-    from stillwar.portfolio import solve_qp as legacy_solve_qp
-
-    assert legacy_run_backtest is run_backtest
-    assert legacy_evaluate_kkt is evaluate_kkt
-    assert legacy_solve_qp is solve_qp

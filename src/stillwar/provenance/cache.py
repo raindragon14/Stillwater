@@ -88,7 +88,7 @@ def cached_backtest(
     forecasts: np.ndarray | None = None,
     force: bool | None = None,
 ) -> BacktestResult:
-    """Memoised :func:`stillwar.portfolio.run_backtest`.
+    """Memoised :func:`stillwar.backtest.engine.run_backtest`.
 
     The result depends only on ``prices``, ``params`` and ``forecasts``; ``dates`` is
     a deterministic slice of ``prices.index`` and is therefore not part of the key.

@@ -82,9 +82,9 @@ src/stillwar/
 └── __main__.py    # `python -m stillwar` wrapper
 ```
 
-The top-level modules (`portfolio.py`, `metrics.py`, `stats.py`, `tables.py`, …) are
-thin compatibility shims for the pre-refactor import paths. New code should import
-from the packages above; see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+The package is the public API; `stillwar.cli` orchestrates the stages and
+`stillwar.__main__` is the `python -m stillwar` wrapper. There are no top-level
+compatibility modules left.
 
 ## Reproducibility
 

@@ -1,11 +1,11 @@
 """Produce Tables 1-3, Table S1 and the Phase-4 diagnostics as raw numbers.
 
 This module replaces the computation half of the old ``reporting.py``. It writes JSON
-containing floats only; :mod:`stillwar.tables` formats them and :mod:`stillwar.figures`
+containing floats only; :mod:`stillwar.reporting.tables` formats them and :mod:`stillwar.reporting.figures`
 draws them. Keeping the three apart is what makes a manuscript table verifiable against
 its artifact.
 
-Every backtest goes through :func:`stillwar.cache.cached_backtest`, so the primary
+Every backtest goes through :func:`stillwar.provenance.cache.cached_backtest`, so the primary
 LogSig configuration is computed once even though Table 1, Table 3, the Phase-4
 diagnostics and both figures all need it.
 """
@@ -35,7 +35,7 @@ from stillwar.provenance.metadata import artifact_metadata, write_json
 
 __all__ = ["run_all", "run_phase4", "run_table1", "run_table2", "run_table3"]
 
-_DEPENDS_ON = ("config", "params", "optimization", "backtest", "provenance", "features", "data")
+_DEPENDS_ON = ("config", "optimization", "backtest", "provenance", "features", "data")
 
 LEARNED_MODELS: tuple[tuple[str, str], ...] = (
     ("LogSig", "logsig"),
@@ -359,7 +359,7 @@ def run_table3(
     Returns
     -------
     dict
-        Counts from :func:`stillwar.portfolio.tabulate_kkt_agreement`.
+        Counts from :func:`stillwar.optimization.kkt.tabulate_kkt_agreement`.
     """
     ds = load_dataset(cfg)
     panel = load_panel(cfg).close

@@ -32,8 +32,8 @@ ARTIFACTS = (
 
 def test_code_digest_is_stable_and_sensitive() -> None:
     """The code digest is deterministic and changes with the module set."""
-    assert code_digest(("config", "params")) == code_digest(("params", "config"))
-    assert code_digest(("config",)) != code_digest(("config", "params"))
+    assert code_digest(("config", "optimization")) == code_digest(("optimization", "config"))
+    assert code_digest(("config",)) != code_digest(("config", "optimization"))
 
 
 def test_code_digest_rejects_unknown_module() -> None:
@@ -44,7 +44,7 @@ def test_code_digest_rejects_unknown_module() -> None:
 
 def test_metadata_block_is_complete(cfg) -> None:
     """Every provenance block carries the fields a reviewer needs."""
-    meta = artifact_metadata(cfg, ("config", "params"))
+    meta = artifact_metadata(cfg, ("config", "optimization"))
     for key in ("config_digest", "code_digest", "git_sha", "git_dirty", "versions", "created_utc"):
         assert key in meta
     for lib in ("python", "numpy", "scipy", "torch"):

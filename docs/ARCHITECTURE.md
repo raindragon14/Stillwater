@@ -1,8 +1,8 @@
 # Architecture
 
 The package is organised by **responsibility**, not by file type. A module may import
-only from packages below it in the dependency order; the compatibility shims at the
-top level exist only for external users and are not imported by new code.
+only from packages below it in the dependency order. `stillwar.cli` is the only
+orchestrator; no package imports the CLI.
 
 ## Dependency order
 

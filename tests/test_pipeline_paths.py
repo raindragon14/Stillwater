@@ -24,7 +24,7 @@ def test_checkpoint_paths_match_between_writer_and_reader(repo_root: Path) -> No
     The previous layout wrote ``logsig/logsig_seed_0.pt`` while the tests read
     ``logsig/msgn_seed_0.pt``, so a retrain produced a tree no test ever inspected.
     """
-    from stillwar.train import train_all_models
+    from stillwar.models.trainer import train_all_models
 
     source = Path(train_all_models.__code__.co_filename).read_text(encoding="utf-8")
     assert 'f"{name}_seed_{seed}.pt"' in source
@@ -43,12 +43,16 @@ def test_forecast_artifact_names_are_consistent(repo_root: Path) -> None:
 
 
 def test_config_has_no_duplicated_defaults(repo_root: Path) -> None:
-    """``portfolio.py`` must not carry literals that shadow ``configs/base.yaml``.
+    """The optimization and backtest packages must not shadow ``configs/base.yaml``.
 
     The old ``get_param`` fallback duplicated fourteen defaults, which is how Table 2
     silently came to be governed by ``portfolio.py`` rather than by the configuration.
     """
-    source = (repo_root / "src" / "stillwar" / "portfolio.py").read_text(encoding="utf-8")
+    source = "\n".join(
+        path.read_text(encoding="utf-8")
+        for package in ("optimization", "backtest")
+        for path in sorted((repo_root / "src" / "stillwar" / package).glob("*.py"))
+    )
     assert "get_param" not in source
     assert "**kwargs" not in source
 
@@ -61,7 +65,7 @@ def test_backtest_params_cover_every_trading_field(cfg: Config) -> None:
     """
     from dataclasses import fields
 
-    from stillwar.params import BacktestParams
+    from stillwar.config import BacktestParams
 
     names = {f.name for f in fields(BacktestParams)}
     trading = set(cfg.trading.model_dump())

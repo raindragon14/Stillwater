@@ -29,8 +29,8 @@ pipeline yang sama.
    `kkt_log.json`, `trials.json`, `gate_weights.json`, dan
    `forecasts_lstm.npz`.
 3. Mencocokkan metode dengan kode dan konfigurasi:
-   `configs/base.yaml`, `src/stillwar/models.py`, `portfolio.py`,
-   `features.py`, `simulate.py`, `universe.py`, dan `data.py`.
+   `configs/base.yaml`, `src/stillwar/models/`, `optimization/`, `backtest/`,
+   `features/`, `experiments/`, `data/`, dan `reporting/`.
 4. Membandingkan dengan manuskrip lengkap `Stillwar/docs/JOURNAL.md` untuk
    detail yang tidak tersimpan di JSON (misalnya jumlah tanggal efektif dan
    persentase hari suspensi).
@@ -47,11 +47,11 @@ pipeline yang sama.
 | 3 | Blocker | Teorema 1 diterapkan pada seluruh 128 tanggal, padahal 75 tanggal memiliki $w^{-} > w_{\max}$ sehingga $w^{-}$ tidak fisibel dan teorema tidak berlaku. Draf juga mengatakan “on the rest the optimizer holds”, padahal 75 tanggal itu justru dipaksa bertransaksi. | `table3.json`: `cap_drift_traded = 75`, `hold_held = 20`; `phase4.json`. | Uji dinyatakan 100% cocok pada 53 tanggal fisibel interior; 75 tanggal dicatat sebagai cap-drift forced trades; Tabel 3 diberi baris cap-drift; §2.6, §2.7, §3.3, dan §4.2 dikualifikasi. |
 | 4 | Mayor | Uji-t Rank IC memakai $n/5$ untuk deret mingguan. Target lima hari pada tanggal rebalance mingguan **tidak** tumpang tindih; koreksi $n/5$ hanya berlaku untuk deret harian ($n = 638$). | `stats.py::rank_ic_test`; `configs/base.yaml` (`effective_ratio_weekly: 1.0`). | §2.10 ditulis ulang: $n = 94$ (Panel A) dan 128 (Panel B), $df = n - 1$; koreksi $n/5$ hanya untuk deret harian. Nilai $p$ diambil dari artefak: ensemble mingguan $p = 0{,}0331$; harian $p = 0{,}0503$. |
 | 5 | Mayor | $M = 1{,}235$ memasukkan sepuluh half-life dari eksperimen smoothing yang tidak ada di pipeline final. Artefak memakai $M = 1{,}225$ (1.200 grid + 20 non-inclusive + 5 klasik). | `trials.json`: `n_trials = 1225`; `trials.py`. | $M = 1{,}225$; eksperimen half-life dihapus; nilai Deflated Sharpe cocok dengan artefak. |
-| 6 | Mayor | $\psi_{\kappa}$ didefinisikan atas seluruh tanggal rebalance, padahal tanggal cap-drift tidak memiliki $\Delta g_t$ berhingga. | `portfolio.py`: `valid_kkt` mengecualikan `delta_g = NaN`. | $\psi_{\kappa}$ didefinisikan atas $\mathcal{R}_{\mathrm{int}}$; $\psi_{5} = 75{,}50\%$ (rata-rata seed) dan $\psi_{5}^{0} = 0{,}00\%$. |
+| 6 | Mayor | $\psi_{\kappa}$ didefinisikan atas seluruh tanggal rebalance, padahal tanggal cap-drift tidak memiliki $\Delta g_t$ berhingga. | `optimization/kkt.py`; `backtest/engine.py` (`valid_kkt` mengecualikan `delta_g = NaN`). | $\psi_{\kappa}$ didefinisikan atas $\mathcal{R}_{\mathrm{int}}$; $\psi_{5} = 75{,}50\%$ (rata-rata seed) dan $\psi_{5}^{0} = 0{,}00\%$. |
 | 7 | Mayor | Cabang `[IF Y < 0]` akan mengklaim penolakan transaksi sebagai keputusan yang konsisten biaya, tanpa menyebut ketidakpastian. Estimasi akhir $-31{,}39$ bps/minggu tetapi $t = -0{,}84$, $p = 0{,}413$. | `phase4.json`. | Dilaporkan sebagai *economically suggestive, not statistically established*; $n = 20$ minggu disebut sebagai batas daya uji. |
 | 8 | Mayor | Permintaan “penalty share vs feature share” tidak terdefinisi dengan baik: fitur tidak menurunkan turnover relatif terhadap Hist-MV berpenalti (20,36%/23,08% vs 1,98%/2,01%), sehingga “feature share” negatif. | `table1.json`. | Diganti dengan dekomposisi kualitatif: penalti menjelaskan penurunan turnover; fitur memulihkan Rank IC dan kinerja bersih relatif terhadap Hist-MV berpenalti. |
 | 9 | Mayor | Alpha vs GMV dan “strategy-level $M = 7$” tidak ada di artefak. | `table1.json` hanya memuat `nw_alpha` vs EW; DSR memakai $M = 1{,}225$. | Klaim vs GMV dan $M = 7$ dihapus; Tabel 1 hanya melaporkan alpha vs EW. |
-| 10 | Mayor | Keterangan Gambar 2 menyebut “heatmap”, padahal gambar aktual adalah dekomposisi batang sektor/konstituen. | `fig3_trigger_heatmap.png`. | Keterangan dan nama berkas diubah menjadi `fig2_trigger_decomposition.*`. |
+| 10 | Mayor | Keterangan Gambar 2 menyebut “heatmap”, padahal gambar aktual adalah dekomposisi batang sektor/konstituen. | `reports/figures/fig2_trigger_decomposition.png`. | Keterangan dan nama berkas diubah menjadi `reports/figures/fig2_trigger_decomposition.*`. |
 | 11 | Mayor | DOCX memakai template “Journal of Education Research” (ISSN 2746-0738) dengan placeholder `x`, `xxxx`, dan “Judul Artikel Font Lato Size 10”; bidang jurnal tidak cocok dengan paper keuangan. | `word/header3.xml`, `word/footer1.xml`. | Markdown dibuat netral jurnal; DOCX diabaikan Git; jurnal target perlu dikonfirmasi. |
 | 12 | Minor | Tanggal tidak konsisten: “2 January 2024” vs tanggal efektif 10 Januari 2024; “2 October 2026” vs observasi terakhir 1 Oktober 2026. | `features.py`; panel data. | Tanggal efektif dan jendela holding dikoreksi. |
 | 13 | Minor | “40 saham LQ45” tanpa menjelaskan seleksi dari 53 kandidat. | `universe.py`. | Ditambahkan 53 kandidat, 2 tanpa snapshot, 51 efektif, 40 terpilih. |
@@ -90,8 +90,9 @@ pipeline yang sama.
   minggu), dan rekomendasi diselaraskan dengan hasil.
 - **Lampiran A**: notasi $g = -\tilde{\mu} + \gamma\Sigma w^{-}$ diseragamkan;
   Tabel 3 ditambah baris cap-drift.
-- **Gambar**: `fig1_kkt_spread.*` dan `fig2_trigger_decomposition.*`
-  disalin dari artefak dan dirujuk dari Markdown.
+- **Gambar**: `reports/figures/fig1_kkt_spread.*` dan
+  `reports/figures/fig2_trigger_decomposition.*` disalin dari artefak dan dirujuk
+  dari Markdown.
 
 ## Yang masih memerlukan keputusan penulis
 

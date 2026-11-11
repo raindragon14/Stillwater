@@ -24,7 +24,7 @@ from stillwar.config.schema import Config
 
 @dataclass(frozen=True, slots=True)
 class BacktestParams:
-    """Frozen parameter set for :func:`stillwar.portfolio.run_backtest`.
+    """Frozen parameter set for :func:`stillwar.backtest.engine.run_backtest`.
 
     Build one with :meth:`from_config`; vary it with :meth:`replace`. Values are
     never defaulted here — ``configs/base.yaml`` remains the single source of truth.

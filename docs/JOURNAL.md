@@ -196,7 +196,7 @@ Because the signal is weak, Table 1 is read less as a contest of forecasts than 
 
 Across the 128 out-of-sample rebalance dates of the primary Panel B LogSig run, passive price drift pushes at least one constituent above $w_{\max} = 0.15$ on 75 dates ($58.6\%$), rendering $w_{t}^{-}$ infeasible for (5) and forcing boundary rebalancing outside the domain of Theorem 1; $w_{t}^{-}$ remains interior feasible on 53 dates ($41.4\%$). Figure 1 plots the gradient spread $\Delta g_{t}$ on those 53 interior dates against the $200\text{ bps}$ band ($\eta_{b} + \eta_{s} = 0.02$ at $\kappa = 5$). The spread crosses the band on 33 dates and stays at or below it on 20; the 75 cap-drift dates lie outside the interior domain and carry no finite spread.
 
-![Figure 1: Gradient spread against the no-trade band](figures/fig1_kkt_spread.png)
+![Figure 1: Gradient spread against the no-trade band](../reports/figures/fig1_kkt_spread.png)
 
 **Figure 1.** Gradient spread $\Delta g_{t}$ of LogSig on interior feasible rebalance dates ($w_{t}^{-} \leq w_{\max}$, $n = 53$) against the no-trade band $\eta_{b} + \eta_{s} = 0.02$ ($\kappa = 5$), Panel B; dates above the band trigger interior signal trades (33 weeks) and dates at or below the band are optimal holds (20 weeks), while cap-drift dates (75 weeks) lie outside the interior domain of Theorem 1 and carry no finite spread. Primary seed.
 
@@ -214,7 +214,7 @@ The mechanism is consistent with signal amplification rather than temporal smoot
 
 Each crossing has two triggers: the sellable asset with the largest gradient and the buyable asset with the smallest. Over the 33 interior crossing dates of the primary run, Figure 2 decomposes the 66 extreme triggers by IDX-IC sector [36] and constituent. Trigger activity is concentrated: the Herfindahl index of trigger shares is $0.0601$ across constituents (about $2.4$ times the uniform baseline $1/40 = 0.025$) and $0.1965$ across sectors. The most frequent trigger is `BRPT.JK` (Basic Materials), with 10 of 66 triggers ($15.15\%$); `BBTN.JK` follows with 6 ($9.09\%$), and `TPIA.JK` and `WIKA.JK` with 5 each ($7.58\%$). By sector, Basic Materials accounts for $34.85\%$ of triggers, Infrastructures $16.67\%$, Financials and Consumer Non-Cyclicals $12.12\%$ each, Consumer Discretionary $9.09\%$, Properties & Real Estate $7.58\%$, Energy $6.06\%$, Utilities $1.52\%$, and Industrials and Healthcare none. On the 33 crossing dates, the trigger assets have a mean trailing 60-day annualized volatility of $55.9\%$, against $37.3\%$ for the other constituents. The weak signal fires rarely, but when it fires it is driven by a few volatile names near the band edge rather than by broad sector rotation; this is a limitation (Section 4.2) and motivates asset-specific penalties (Section 4.3).
 
-![Figure 2: Trigger concentration by constituent and sector](figures/fig2_trigger_decomposition.png)
+![Figure 2: Trigger concentration by constituent and sector](../reports/figures/fig2_trigger_decomposition.png)
 
 **Figure 2.** Trigger assets on the 33 interior band-crossing dates by IDX-IC sector [36] and top constituents (LogSig, $\kappa = 5$); horizontal bars decompose extreme sell and buy gradient triggers across sectors (left) and the top 10 constituents (right).
 

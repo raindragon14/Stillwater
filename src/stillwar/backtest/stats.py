@@ -1,8 +1,8 @@
 """Statistical primitives: Rank IC, HAC alpha, the Deflated Sharpe ratio, persistence.
 
 These are the estimators of JOURNAL Section 2.10. They are deliberately free of any
-knowledge about portfolios or files: :mod:`stillwar.metrics` composes them into the
-reportable quantities, and :mod:`stillwar.tables` formats those.
+knowledge about portfolios or files: :mod:`stillwar.backtest.metrics` composes them into the
+reportable quantities, and :mod:`stillwar.reporting.tables` formats those.
 """
 
 import numpy as np

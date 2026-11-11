@@ -69,7 +69,7 @@ def test_corrupt_cache_entry_is_rebuilt(tmp_path, monkeypatch, cfg) -> None:
 def test_stage_freshness_tracks_config_and_code(tmp_path, monkeypatch, cfg) -> None:
     """A stage is fresh only while its config and code digests match."""
     monkeypatch.setattr(cache, "STAGE_DIR", tmp_path / "stages")
-    deps = ("config", "params")
+    deps = ("config", "backtest")
 
     assert not cache.is_fresh("demo", cfg, deps)
     cache.mark_done("demo", cfg, deps)

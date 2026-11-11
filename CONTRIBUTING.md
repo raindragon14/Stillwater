@@ -39,8 +39,8 @@ uv run python -m stillwar tables --bless
 - **Add a test for every new invariant.** Mathematical properties belong in
   `tests/test_kkt_theorem.py` or `tests/test_levy_area.py`; artifact contracts belong in
   `tests/test_provenance.py`.
-- **Import from packages, not shims.** New code uses `stillwar.config`,
+- **Import from the owning package.** New code uses `stillwar.config`,
   `stillwar.data`, `stillwar.features`, `stillwar.models`, `stillwar.optimization`,
   `stillwar.backtest`, `stillwar.experiments`, `stillwar.reporting` and
-  `stillwar.provenance`. The top-level modules are compatibility shims.
+  `stillwar.provenance`; `stillwar.cli` is the only orchestrator.
 - **Keep the package boundary.** Reporting reads JSON artifacts; it never re-simulates.

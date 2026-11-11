@@ -211,7 +211,7 @@ def _light_grid(ax: plt.Axes, axis: str = "y") -> None:
     ax.set_axisbelow(True)
 
 
-def plot_architecture(out_path: str | Path = FIG_DIR / "fig1_architecture.png") -> None:
+def plot_architecture(out_path: str | Path = FIG_DIR / "figS1_architecture.png") -> None:
     """Draw the end-to-end pipeline schematic (manuscript Figure 1).
 
     Parameters
@@ -315,7 +315,7 @@ def plot_architecture(out_path: str | Path = FIG_DIR / "fig1_architecture.png") 
 def plot_kkt_spread(
     kkt_log: Sequence[dict[str, Any]],
     band: float,
-    out_path: str | Path = FIG_DIR / "fig2_kkt_spread.png",
+    out_path: str | Path = FIG_DIR / "fig1_kkt_spread.png",
 ) -> None:
     """Plot the gradient spread against the no-trade band (manuscript Figure 2).
 
@@ -423,7 +423,7 @@ def plot_kkt_spread(
 def plot_triggers(
     kkt_log: Sequence[dict[str, Any]],
     tickers: Sequence[str],
-    out_path: str | Path = FIG_DIR / "fig3_trigger_heatmap.png",
+    out_path: str | Path = FIG_DIR / "fig2_trigger_decomposition.png",
 ) -> None:
     """Plot the sector and constituent trigger decomposition (manuscript Figure 3).
 
@@ -517,7 +517,7 @@ def plot_sensitivity(
     tolerance: dict[str, Any],
     shrinkage: dict[str, Any],
     volatility: dict[str, Any],
-    out_path: str | Path = FIG_DIR / "fig4_sensitivity_and_extensions.png",
+    out_path: str | Path = FIG_DIR / "figS2_sensitivity.png",
 ) -> None:
     """Plot the three structural extensions (manuscript Figure 4).
 
@@ -707,11 +707,9 @@ def plot_all(processed: str | Path = "data/processed", out_dir: str | Path = FIG
     tickers = [str(t) for t in np.load(root / "forecasts_logsig.npz", allow_pickle=True)["tickers"]]
 
     written = [
-        *plot_architecture(out / "fig1_architecture.png"),
-        *plot_kkt_spread(kkt_log, phase4["no_trade_band"], out / "fig2_kkt_spread.png"),
-        *plot_triggers(kkt_log, tickers, out / "fig3_trigger_heatmap.png"),
-        *plot_sensitivity(
-            tolerance, shrinkage, volatility, out / "fig4_sensitivity_and_extensions.png"
-        ),
+        *plot_architecture(out / "figS1_architecture.png"),
+        *plot_kkt_spread(kkt_log, phase4["no_trade_band"], out / "fig1_kkt_spread.png"),
+        *plot_triggers(kkt_log, tickers, out / "fig2_trigger_decomposition.png"),
+        *plot_sensitivity(tolerance, shrinkage, volatility, out / "figS2_sensitivity.png"),
     ]
     return sorted(written)

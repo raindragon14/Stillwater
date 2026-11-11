@@ -1,7 +1,7 @@
 """Command-line interface: ``python -m stillwar <stage>``.
 
 Each stage is independently invocable and idempotent. Stages that are expensive check
-:func:`stillwar.cache.is_fresh` first, so ``make all`` on an unchanged tree only
+:func:`stillwar.provenance.cache.is_fresh` first, so ``make all`` on an unchanged tree only
 re-renders tables and figures. Pass ``--force`` to bypass every cache check.
 
 Stage order and dependencies::
@@ -42,9 +42,9 @@ CHECKPOINTS = Path("models/checkpoints")
 
 _FEATURE_DEPS = ("config", "data", "features")
 _TRAIN_DEPS = ("config", "models", "features", "data", "backtest")
-_SIMULATE_DEPS = ("config", "params", "optimization", "backtest", "provenance", "features", "data", "experiments")
-_EXPERIMENT_DEPS = ("config", "params", "optimization", "backtest", "provenance", "features", "data", "experiments")
-_TRIAL_DEPS = ("config", "params", "optimization", "backtest", "provenance", "features", "data", "experiments")
+_SIMULATE_DEPS = ("config", "optimization", "backtest", "provenance", "features", "data", "experiments")
+_EXPERIMENT_DEPS = ("config", "optimization", "backtest", "provenance", "features", "data", "experiments")
+_TRIAL_DEPS = ("config", "optimization", "backtest", "provenance", "features", "data", "experiments")
 
 
 def _skip(stage: str) -> None:
@@ -101,7 +101,7 @@ def stage_train(cfg: Config) -> int:
 
     gates = gate_activations("logsig", ds, cfg, trained["logsig"]["fits"][cfg.seeds[0]])
     if gates.size:
-        from stillwar.stats import gate_weights
+        from stillwar.backtest.stats import gate_weights
 
         write_json(
             PROCESSED / "gate_weights.json",

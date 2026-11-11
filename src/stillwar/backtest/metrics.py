@@ -1,8 +1,8 @@
 """Portfolio-level aggregation: turn backtest results into reportable numbers.
 
 The invariant of this module is that it returns **only numbers**. No percentages, no
-``"±"``, no rounding, no file I/O. Formatting belongs to :mod:`stillwar.tables` and
-:mod:`stillwar.figures`, and keeping the two apart is what lets
+``"±"``, no rounding, no file I/O. Formatting belongs to :mod:`stillwar.reporting.tables` and
+:mod:`stillwar.reporting.figures`, and keeping the two apart is what lets
 ``tests/test_manuscript_tables.py`` regenerate a manuscript table and compare it
 against the committed one cell by cell.
 
@@ -37,7 +37,7 @@ def backtest_metrics(result: BacktestResult) -> dict[str, float]:
     Parameters
     ----------
     result
-        Output of :func:`stillwar.portfolio.run_backtest`.
+        Output of :func:`stillwar.backtest.engine.run_backtest`.
 
     Returns
     -------

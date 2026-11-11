@@ -46,7 +46,7 @@ def code_digest(depends_on: Sequence[str]) -> str:
     Parameters
     ----------
     depends_on
-        Module names inside ``stillwar``, e.g. ``("portfolio", "params")``.
+        Module or package names inside ``stillwar``, e.g. ``("optimization", "config")``.
 
     Returns
     -------
@@ -120,7 +120,7 @@ def write_json(path: str | Path, metadata: dict[str, Any], results: Any) -> None
         Output of :func:`artifact_metadata`.
     results
         JSON-serialisable payload. Must contain floats, never pre-formatted strings:
-        formatting belongs to ``stillwar.tables``.
+        formatting belongs to ``stillwar.reporting.tables``.
     """
     import json
 

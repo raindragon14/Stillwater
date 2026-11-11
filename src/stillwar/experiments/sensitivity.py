@@ -3,7 +3,7 @@
 Each experiment is a list of :class:`GridCell` values crossed with the seed set and run
 through one shared runner, so the three experiments no longer repeat the same
 load / pool / slice / aggregate boilerplate. Every result is written as raw numbers
-with a provenance block; formatting happens in :mod:`stillwar.tables`.
+with a provenance block; formatting happens in :mod:`stillwar.reporting.tables`.
 """
 
 from collections.abc import Sequence
@@ -28,7 +28,7 @@ __all__ = [
     "run_volatility_penalty_experiment",
 ]
 
-_DEPENDS_ON = ("config", "params", "optimization", "backtest", "provenance", "features", "data")
+_DEPENDS_ON = ("config", "optimization", "backtest", "provenance", "features", "data")
 
 
 @dataclass(frozen=True)

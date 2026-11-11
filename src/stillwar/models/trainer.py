@@ -22,11 +22,11 @@ from typing import Any
 import numpy as np
 import torch
 
+from stillwar.backtest.stats import rank_ic
 from stillwar.config import Config
 from stillwar.features import Dataset
 from stillwar.models.architectures import build_model
 from stillwar.models.loss import composite_loss
-from stillwar.stats import rank_ic
 
 MODELS: tuple[str, ...] = ("logsig", "logsig_inc", "mlp", "lstm")
 

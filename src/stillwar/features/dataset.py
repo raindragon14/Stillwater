@@ -10,10 +10,10 @@ import numpy as np
 import pandas as pd
 from numpy.lib.stride_tricks import sliding_window_view
 
-from stillwar import cache as disk_cache
 from stillwar.config import Config
 from stillwar.data import Panel, load_panel
 from stillwar.features.logsig import BLOCK, INCREMENT_SLOTS, SEQ_LEN, logsig_features
+from stillwar.provenance import cache as disk_cache
 
 __all__ = ["Dataset", "build_dataset", "load_dataset", "split_indices"]
 

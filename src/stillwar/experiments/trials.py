@@ -33,7 +33,7 @@ NON_INCLUSIVE = {"c_b": 0.001933, "c_s": 0.002933}
 
 N_TRIALS = 4 * 5 * len(GAMMAS) * len(KAPPAS) * len(COST_MULTIPLIERS) + 20 + 5
 
-_DEPENDS_ON = ("config", "params", "optimization", "backtest", "provenance", "features", "data")
+_DEPENDS_ON = ("config", "optimization", "backtest", "provenance", "features", "data")
 
 
 def run_trial_grid(
