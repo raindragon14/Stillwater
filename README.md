@@ -36,6 +36,10 @@ separate and expensive:
 make trials                  # about 20 minutes, once
 ```
 
+> `make` is a convenience wrapper. On Windows without GNU make, run the same stages
+> directly with `uv run python -m stillwar <stage>`; every stage accepts `--config`,
+> `--set SECTION__KEY=VALUE` and `--force`.
+
 Quality gates:
 
 ```bash
