@@ -21,7 +21,8 @@ import numpy as np
 from stillwar.config import BacktestParams, Config
 from stillwar.data import load_panel
 from stillwar.features import load_dataset
-from stillwar.provenance.metadata import artifact_metadata, cache, write_json
+from stillwar.provenance import cache
+from stillwar.provenance.metadata import artifact_metadata, write_json
 
 __all__ = ["N_TRIALS", "load_trials", "run_trial_grid"]
 

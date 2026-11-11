@@ -1,0 +1,62 @@
+name: ci
+
+on:
+  push:
+    branches: [main, rebuild]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: lint and tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.8"
+          python-version: "3.14"
+          enable-cache: true
+
+      - name: Install dependencies
+        run: uv sync --frozen --extra dev
+
+      - name: Lint
+        run: uv run ruff check src tests
+
+      - name: Test
+        run: uv run pytest tests -q
+
+      - name: Verify raw-data manifest
+        run: uv run python -m stillwar verify
+
+      - name: Check manuscript structure
+        run: uv run python tools/check_manuscript.py
+
+  pipeline:
+    name: pipeline smoke test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.8"
+          python-version: "3.14"
+          enable-cache: true
+
+      - name: Install dependencies
+        run: uv sync --frozen --extra dev
+
+      - name: Build features from the archived snapshot
+        run: uv run python -m stillwar features
+
+      - name: Sync manuscript tables from archived artifacts
+        run: uv run python -m stillwar tables
+
+      - name: Manuscript must not drift from artifacts
+        run: git diff --exit-code docs/JOURNAL.md

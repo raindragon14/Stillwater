@@ -30,7 +30,8 @@ from stillwar.data import load_panel
 from stillwar.experiments.trials import load_trials
 from stillwar.features import load_dataset
 from stillwar.optimization.kkt import tabulate_kkt_agreement
-from stillwar.provenance.metadata import artifact_metadata, cache, write_json
+from stillwar.provenance import cache
+from stillwar.provenance.metadata import artifact_metadata, write_json
 
 __all__ = ["run_all", "run_phase4", "run_table1", "run_table2", "run_table3"]
 

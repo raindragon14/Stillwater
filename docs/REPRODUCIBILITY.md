@@ -1,5 +1,11 @@
 # Reproducibility Report
 
+> **Note (v2.0.0).** This report documents the v1.0.0 reproducibility pass. The code
+> has since been reorganised into packages (`config/`, `data/`, `features/`, `models/`,
+> `optimization/`, `backtest/`, `experiments/`, `reporting/`, `provenance/`); the stage
+> names and numerical guarantees below are unchanged. See
+> [`ARCHITECTURE.md`](ARCHITECTURE.md) for the current layout.
+
 **Date:** 8 November 2026
 **Scope:** refactor of the `stillwar` pipeline for effective LoC, complete docstrings, and minimal `make all` overhead.
 **Status:** the pipeline regenerates every table and figure from a clean checkout. **The regenerated numbers differ from the previously published ones**, for the reasons in §3. The manuscript tables have been regenerated automatically; the surrounding prose still quotes the previous values (§5).

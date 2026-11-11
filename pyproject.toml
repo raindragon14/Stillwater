@@ -76,6 +76,9 @@ build-backend = "setuptools.build_meta"
 where = ["src"]
 include = ["stillwar*"]
 
+[tool.setuptools.package-data]
+stillwar = ["py.typed"]
+
 [tool.pytest.ini_options]
 pythonpath = ["src", "."]
 testpaths = ["tests"]

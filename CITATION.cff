@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "If you use this code or the manuscript, please cite it as below."
+title: "When the Optimizer Refuses to Trade: A KKT No-Trade Zone and Lévy-Area Signal Activation under Weak Signals in LQ45 Equities"
+version: 2.0.0
+date-released: 2026-11-11
+license: MIT
+repository-code: "https://github.com/raindragon14/Stillwar"
+url: "https://github.com/raindragon14/Stillwar"
+keywords:
+  - reproducible research
+  - portfolio optimization
+  - log-signature
+  - Levy area
+  - KKT conditions
+  - transaction costs
+  - Indonesia Stock Exchange
+authors:
+  - family-names: Pandanarang
+    given-names: Muhammad Reihan
+    email: mrpandanarang@gmail.com
+    affiliation: "Mathematics Department, Universitas Negeri Semarang"
+preferred-citation:
+  type: article
+  title: "When the Optimizer Refuses to Trade: A KKT No-Trade Zone and Lévy-Area Signal Activation under Weak Signals in LQ45 Equities"
+  authors:
+    - family-names: Pandanarang
+      given-names: Muhammad Reihan
+  year: 2026
+  journal: "Manuscript"

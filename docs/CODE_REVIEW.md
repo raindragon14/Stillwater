@@ -1,3 +1,5 @@
+> **Note (v2.0.0).** This audit predates the package split. The findings are kept as a historical record; see `ARCHITECTURE.md` for the current module boundaries.
+
 # Codebase Review — Reproducibility Audit of `docs/JOURNAL.md`
 
 **Scope:** entire repository (`src/stillwar`, `tests`, `configs`, `Makefile`, `pyproject.toml`, committed artifacts, git history).
@@ -556,3 +558,4 @@ The invariant to enforce: **`metrics.py` returns only floats; `tables.py` and `f
 | Duplicate runs of the primary backtest | ≥ 9 |
 | Source LOC (12 modules) | 2,451 |
 | Test LOC (8 modules) | 657 |
+

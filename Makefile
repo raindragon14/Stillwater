@@ -1,16 +1,21 @@
 # Makefile for the Stillwar reproducibility pipeline.
 #
 # `make all` regenerates every table and figure from the raw snapshot. Expensive
-# stages are content-addressed (see src/stillwar/cache.py), so a second `make all`
-# on an unchanged tree only re-renders tables and figures. Use `make all FORCE=1`
-# to recompute everything.
-.PHONY: all help setup verify ingest features train baselines simulate experiments figures tables trials test lint clean
+# stages are content-addressed (see src/stillwar/provenance/cache.py), so a second
+# `make all` on an unchanged tree only re-renders tables and figures. Use
+# `make all FORCE=1` to recompute everything.
+.PHONY: all help setup verify ingest features train baselines simulate experiments figures tables trials test lint format typecheck manuscript check clean
 
 PYTHON ?= uv run python
 PYTEST ?= uv run pytest
 RUFF   ?= uv run ruff
+MYPY   ?= uv run mypy
 FORCE  ?= 0
 FORCEARG = $(if $(filter 1,$(FORCE)),--force,)
+
+# Make the source tree importable even when the package has not been installed
+# (useful for a fresh checkout and for CI jobs that only need the CLI).
+export PYTHONPATH := src$(if $(PYTHONPATH),:$(PYTHONPATH))
 
 help:
 	@echo "Stillwar reproducibility pipeline:"
@@ -28,14 +33,18 @@ help:
 	@echo "  make tables      - regenerate the manuscript tables and sync docs/JOURNAL.md"
 	@echo "  make test        - run the test suite"
 	@echo "  make lint        - run ruff over src and tests"
-	@echo "  make clean       - remove caches and generated artifacts"
+	@echo "  make format      - format src and tests with ruff"
+	@echo "  make typecheck   - run mypy over the package"
+	@echo "  make manuscript  - structural check of docs/JOURNAL.md"
+	@echo "  make check       - lint + test + manuscript check"
+	@echo "  make clean       - remove caches and generated binary arrays"
 	@echo ""
 	@echo "  FORCE=1 recomputes every stage regardless of the cache."
 
 all: verify features train baselines simulate experiments figures tables test
 
 setup:
-	uv pip install -e ".[dev]"
+	uv sync --extra dev
 
 verify:
 	$(PYTHON) -m stillwar verify $(FORCEARG)
@@ -70,9 +79,20 @@ tables:
 lint:
 	$(RUFF) check src tests
 
+format:
+	$(RUFF) format src tests
+
+typecheck:
+	$(MYPY) src/stillwar
+
+manuscript:
+	$(PYTHON) tools/check_manuscript.py
+
 test:
 	$(PYTEST) tests/ -q
 
+check: lint test manuscript
+
 clean:
-	$(PYTHON) -c "import shutil, pathlib; [shutil.rmtree(p, ignore_errors=True) for p in [pathlib.Path('.cache')]]; [shutil.rmtree(p, ignore_errors=True) for p in pathlib.Path('.').rglob('__pycache__')]; [p.unlink() for p in pathlib.Path('data/processed').glob('*.json')]"
-	@echo "Cleaned .cache, __pycache__ and data/processed/*.json"
+	$(PYTHON) -c "import pathlib, shutil; [shutil.rmtree(p, ignore_errors=True) for p in [pathlib.Path('.cache'), pathlib.Path('.pytest_cache'), pathlib.Path('.ruff_cache'), pathlib.Path('.mypy_cache')]]; [shutil.rmtree(p, ignore_errors=True) for p in pathlib.Path('.').rglob('__pycache__')]; [p.unlink() for p in pathlib.Path('data/processed').glob('*.npz')]; [p.unlink() for p in pathlib.Path('data/processed').glob('*_cache.json')]"
+	@echo "Cleaned caches and generated binary arrays (tracked JSON artifacts kept)."
