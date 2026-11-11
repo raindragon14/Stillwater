@@ -6,8 +6,14 @@ from pathlib import Path
 
 import pytest
 
-from stillwar.provenance import artifact_metadata, code_digest, read_json, write_json
-from stillwar.tables import load_blocks, render_table1, render_table2, render_table3, sync_manuscript
+from stillwar.provenance.metadata import artifact_metadata, code_digest, read_json, write_json
+from stillwar.reporting.tables import (
+    load_blocks,
+    render_table1,
+    render_table2,
+    render_table3,
+    sync_manuscript,
+)
 from tests.helpers import needs
 
 PROCESSED = "data/processed"

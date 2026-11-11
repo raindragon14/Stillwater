@@ -2,8 +2,13 @@
 
 import numpy as np
 
-from stillwar.metrics import backtest_metrics, declined_trade_test, seed_summary, trigger_concentration
-from stillwar.stats import (
+from stillwar.backtest.metrics import (
+    backtest_metrics,
+    declined_trade_test,
+    seed_summary,
+    trigger_concentration,
+)
+from stillwar.backtest.stats import (
     deflated_sharpe,
     gate_weights,
     lag_autocorr,

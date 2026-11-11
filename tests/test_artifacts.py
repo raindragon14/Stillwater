@@ -6,9 +6,9 @@ import numpy as np
 import pytest
 import torch
 
-from stillwar.artifacts import MODEL_KEYS
 from stillwar.config import load_config
 from stillwar.models import MSGN, LogSigInc, LSTMBaseline, MLPBaseline
+from stillwar.provenance.artifacts import MODEL_KEYS
 from tests.helpers import needs
 
 EXPECTED_PARAMS = {"logsig": 923, "logsig_inc": 353, "mlp": 1505, "lstm": 4513}

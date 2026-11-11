@@ -1,4 +1,4 @@
-"""Forecasting models matching JOURNAL Sections 2.4 and 2.8.
+"""Forecasting architectures for the Stillwar pipeline.
 
 Four architectures, all trained on the same target and loss:
 
@@ -6,12 +6,25 @@ Four architectures, all trained on the same target and loss:
 * :class:`MLP` -- a single-hidden-layer dense baseline on the 45 features.
 * :class:`LSTM` -- a sequential baseline on the raw 60-day return path.
 
-Parameter counts are asserted by ``tests/test_model_architectures.py`` and quoted in the
-manuscript: 923 (MSGN), 353 (LogSig-Inc), 1,505 (MLP), 4,513 (LSTM).
+Parameter counts are asserted by ``tests/test_model_architectures.py`` and quoted in
+the manuscript: 923 (MSGN), 353 (LogSig-Inc), 1,505 (MLP), 4,513 (LSTM).
 """
+
+from __future__ import annotations
 
 import torch
 from torch import nn
+
+__all__ = [
+    "Gated",
+    "LSTM",
+    "LSTMBaseline",
+    "MLP",
+    "MLPBaseline",
+    "MSGN",
+    "LogSigInc",
+    "build_model",
+]
 
 BLOCK = 15
 
@@ -55,8 +68,11 @@ class Gated(nn.Module):
         chunks = x.split(self.block, -1)
         if len(chunks) != len(self.branches):
             raise ValueError(f"expected {len(self.branches)} feature blocks, got {len(chunks)}")
-        h = torch.stack([torch.relu(b(z)) for b, z in zip(self.branches, chunks, strict=True)], -2)
-        return self.head((self.gates(x).unsqueeze(-1) * h).sum(-2)).squeeze(-1)
+        hidden = torch.stack(
+            [torch.relu(branch(chunk)) for branch, chunk in zip(self.branches, chunks, strict=True)],
+            -2,
+        )
+        return self.head((self.gates(x).unsqueeze(-1) * hidden).sum(-2)).squeeze(-1)
 
 
 class MLP(nn.Module):
@@ -96,9 +112,9 @@ class LSTM(nn.Module):
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """Forecast from a ``(batch, n_assets, 60, 1)`` sequence tensor."""
-        b, n, t, c = x.shape
-        _, (h, _) = self.lstm(x.reshape(b * n, t, c))
-        return self.head(h[-1]).reshape(b, n)
+        batch, n_assets, length, channels = x.shape
+        _, (hidden, _) = self.lstm(x.reshape(batch * n_assets, length, channels))
+        return self.head(hidden[-1]).reshape(batch, n_assets)
 
 
 class MSGN(Gated):
@@ -160,32 +176,3 @@ def build_model(name: str, hidden: int = 16) -> nn.Module:
         case "lstm":
             return LSTM(32)
     raise KeyError(name)
-
-
-def _zscore(a: torch.Tensor) -> torch.Tensor:
-    """Cross-sectional z-score along the asset axis, clipped to ``[-3, 3]``."""
-    return torch.clamp((a - a.mean(1, keepdim=True)) / (a.std(1, keepdim=True) + 1e-8), -3.0, 3.0)
-
-
-def composite_loss(pred: torch.Tensor, y: torch.Tensor, var_y: float, lam: float = 1.0) -> torch.Tensor:
-    """NMSE plus a differentiable cross-sectional ranking surrogate (JOURNAL Eq. 3).
-
-    Parameters
-    ----------
-    pred, y
-        ``(n_dates, n_assets)`` forecasts and targets.
-    var_y
-        Training variance of the target, used to normalise the squared error.
-    lam
-        Weight on the ``1 - rho`` ranking term.
-
-    Returns
-    -------
-    torch.Tensor
-        Scalar loss.
-    """
-    nmse = ((pred - y) ** 2).mean() / var_y
-    u, v = _zscore(pred), _zscore(y)
-    u, v = u - u.mean(1, keepdim=True), v - v.mean(1, keepdim=True)
-    rho = (u * v).sum(1) / (((u**2).sum(1) + 1e-8).sqrt() * ((v**2).sum(1) + 1e-8).sqrt())
-    return nmse + lam * (1.0 - rho).mean()

@@ -3,7 +3,7 @@
 import numpy as np
 import pytest
 
-from stillwar.portfolio import evaluate_kkt, solve_qp
+from stillwar.optimization import evaluate_kkt, solve_qp
 
 
 def _psd(rng: np.random.Generator, n: int) -> np.ndarray:
@@ -141,7 +141,7 @@ def test_feasible_start_satisfies_all_constraints() -> None:
     cap-drift date, which produced a persistent line-search stall on the
     volatility-scaled extension.
     """
-    from stillwar.portfolio import _feasible_start
+    from stillwar.optimization.qp import _feasible_start
 
     rng = np.random.default_rng(11)
     for _ in range(50):
@@ -190,8 +190,7 @@ def test_volatility_scaled_solve_converges() -> None:
 
 def test_penalty_vectors_shapes(repo_root) -> None:
     """Scalar and per-asset penalties broadcast to the same shape."""
-    from stillwar.config import load_config
-    from stillwar.params import BacktestParams
+    from stillwar.config import BacktestParams, load_config
 
     params = BacktestParams.from_config(load_config(repo_root / "configs/base.yaml"))
     eta_b, eta_s = params.penalty_vectors(40)

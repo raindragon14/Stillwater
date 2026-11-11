@@ -1,17 +1,28 @@
-"""Typed experiment configuration with dotted overrides and a content hash.
+"""Typed, frozen configuration schema for the Stillwar pipeline.
 
 The YAML file in ``configs/`` is the single source of truth for every number in the
-pipeline. Nothing downstream may carry a default that is not also present here:
-:class:`Config` is frozen, rejects unknown keys (``extra="forbid"``), and exposes a
-content digest that is written into every artifact for provenance.
+pipeline.  Nothing downstream may carry a default that is not also present there:
+:class:`Config` is frozen, rejects unknown keys (``extra="forbid"``), and exposes
+content digests that are written into every artifact for provenance.
 """
 
+from __future__ import annotations
+
 import hashlib
-from pathlib import Path
 from typing import Any
 
-import yaml
 from pydantic import BaseModel, ConfigDict
+
+__all__ = [
+    "Config",
+    "Data",
+    "Features",
+    "Reporting",
+    "Splits",
+    "Trading",
+    "Train",
+    "Workers",
+]
 
 
 class _Frozen(BaseModel):
@@ -103,7 +114,7 @@ class Reporting(_Frozen):
 
 
 class Config(_Frozen):
-    """Root configuration; construct with :func:`load_config`."""
+    """Root configuration; construct with :func:`stillwar.config.load_config`."""
 
     seeds: tuple[int, ...]
     data: Data
@@ -114,7 +125,7 @@ class Config(_Frozen):
     workers: Workers
     reporting: Reporting
 
-    def override(self, **dotted: Any) -> "Config":
+    def override(self, **dotted: Any) -> Config:
         """Return a copy with overrides written ``section__key=value``.
 
         Examples
@@ -125,8 +136,8 @@ class Config(_Frozen):
         for key, value in dotted.items():
             *parents, leaf = key.split("__")
             node = raw
-            for p in parents:
-                node = node[p]
+            for parent in parents:
+                node = node[parent]
             if leaf not in node:
                 raise KeyError(key)
             node[leaf] = value
@@ -150,25 +161,3 @@ class Config(_Frozen):
             "features": self.features.model_dump(),
         }
         return hashlib.sha256(repr(sorted(payload.items())).encode()).hexdigest()[:16]
-
-
-def load_config(path: str | Path = "configs/base.yaml") -> Config:
-    """Load and validate the YAML configuration.
-
-    Parameters
-    ----------
-    path
-        Path to the YAML file. Defaults to ``configs/base.yaml``.
-
-    Returns
-    -------
-    Config
-        Frozen, fully validated configuration.
-
-    Raises
-    ------
-    pydantic.ValidationError
-        If a required field is missing or an unknown field is present.
-    """
-    with open(path, encoding="utf-8") as f:
-        return Config(**yaml.safe_load(f))

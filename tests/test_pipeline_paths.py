@@ -4,9 +4,9 @@ from pathlib import Path
 
 import pytest
 
-from stillwar.__main__ import ALL_STAGES, STAGES
-from stillwar.artifacts import MODEL_KEYS
+from stillwar.cli import ALL_STAGES, STAGES
 from stillwar.config import Config, load_config
+from stillwar.provenance.artifacts import MODEL_KEYS
 
 
 def test_every_stage_is_reachable() -> None:
@@ -35,7 +35,7 @@ def test_checkpoint_paths_match_between_writer_and_reader(repo_root: Path) -> No
 
 def test_forecast_artifact_names_are_consistent(repo_root: Path) -> None:
     """``train`` writes ``forecasts_<model>.npz`` for exactly the models ``simulate`` loads."""
-    from stillwar.__main__ import stage_train
+    from stillwar.cli import stage_train
 
     source = Path(stage_train.__code__.co_filename).read_text(encoding="utf-8")
     assert 'f"forecasts_{key}.npz"' in source
