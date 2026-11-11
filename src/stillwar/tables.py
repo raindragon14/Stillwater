@@ -6,7 +6,7 @@ New code should import from :mod:`stillwar.reporting.tables`.
 from stillwar.reporting.tables import (
     GOLDEN_ARTIFACTS,
     JOURNAL,
-    bless_golden,
+    bless_golden_values,
     load_blocks,
     render_table1,
     render_table2,
@@ -18,7 +18,7 @@ from stillwar.reporting.tables import (
 __all__ = [
     "GOLDEN_ARTIFACTS",
     "JOURNAL",
-    "bless_golden",
+    "bless_golden_values",
     "load_blocks",
     "render_table1",
     "render_table2",

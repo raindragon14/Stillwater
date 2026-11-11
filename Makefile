@@ -12,6 +12,9 @@ RUFF   ?= uv run ruff
 MYPY   ?= uv run mypy
 FORCE  ?= 0
 FORCEARG = $(if $(filter 1,$(FORCE)),--force,)
+CONFIG ?= configs/base.yaml
+SET    ?=
+SETARG = $(if $(SET),--set $(SET),)
 
 # Make the source tree importable even when the package has not been installed
 # (useful for a fresh checkout and for CI jobs that only need the CLI).
@@ -40,6 +43,8 @@ help:
 	@echo "  make clean       - remove caches and generated binary arrays"
 	@echo ""
 	@echo "  FORCE=1 recomputes every stage regardless of the cache."
+	@echo "  CONFIG=configs/local.yaml selects another configuration."
+	@echo "  SET=workers__backtest=1 overrides one config value (repeatable)."
 
 all: verify features train baselines simulate experiments figures tables test
 
@@ -47,34 +52,34 @@ setup:
 	uv sync --extra dev
 
 verify:
-	$(PYTHON) -m stillwar verify $(FORCEARG)
+	$(PYTHON) -m stillwar verify $(FORCEARG) --config $(CONFIG) $(SETARG)
 
 ingest:
-	$(PYTHON) -m stillwar ingest $(FORCEARG)
+	$(PYTHON) -m stillwar ingest $(FORCEARG) --config $(CONFIG) $(SETARG)
 
 features:
-	$(PYTHON) -m stillwar features $(FORCEARG)
+	$(PYTHON) -m stillwar features $(FORCEARG) --config $(CONFIG) $(SETARG)
 
 train:
-	$(PYTHON) -m stillwar train $(FORCEARG)
+	$(PYTHON) -m stillwar train $(FORCEARG) --config $(CONFIG) $(SETARG)
 
 baselines:
-	$(PYTHON) -m stillwar baselines $(FORCEARG)
+	$(PYTHON) -m stillwar baselines $(FORCEARG) --config $(CONFIG) $(SETARG)
 
 simulate:
-	$(PYTHON) -m stillwar simulate $(FORCEARG)
+	$(PYTHON) -m stillwar simulate $(FORCEARG) --config $(CONFIG) $(SETARG)
 
 experiments:
-	$(PYTHON) -m stillwar experiments $(FORCEARG)
+	$(PYTHON) -m stillwar experiments $(FORCEARG) --config $(CONFIG) $(SETARG)
 
 trials:
-	$(PYTHON) -m stillwar trials $(FORCEARG)
+	$(PYTHON) -m stillwar trials $(FORCEARG) --config $(CONFIG) $(SETARG)
 
 figures:
-	$(PYTHON) -m stillwar figures
+	$(PYTHON) -m stillwar figures --config $(CONFIG) $(SETARG)
 
 tables:
-	$(PYTHON) -m stillwar tables
+	$(PYTHON) -m stillwar tables --config $(CONFIG) $(SETARG)
 
 lint:
 	$(RUFF) check src tests

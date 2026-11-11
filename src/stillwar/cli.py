@@ -18,6 +18,7 @@ import sys
 from pathlib import Path
 
 import numpy as np
+import yaml
 
 from stillwar.config import Config, load_config
 from stillwar.data import download, verify_manifest
@@ -34,7 +35,7 @@ from stillwar.provenance import cache
 from stillwar.provenance.artifacts import MODEL_KEYS, load_all, save_baselines, save_forecasts
 from stillwar.provenance.metadata import artifact_metadata, write_json
 from stillwar.reporting.figures import plot_all
-from stillwar.reporting.tables import JOURNAL, bless_golden, load_blocks, sync_manuscript
+from stillwar.reporting.tables import JOURNAL, bless_golden_values, load_blocks, sync_manuscript
 
 PROCESSED = Path("data/processed")
 CHECKPOINTS = Path("models/checkpoints")
@@ -213,11 +214,18 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="stillwar", description="Stillwar reproducibility pipeline")
     parser.add_argument("stage", choices=[*STAGES, "all"], nargs="?", default="verify")
     parser.add_argument("--config", default="configs/base.yaml", help="path to the YAML configuration")
+    parser.add_argument(
+        "--set",
+        action="append",
+        default=[],
+        metavar="SECTION__KEY=VALUE",
+        help="override one configuration value (repeatable), e.g. workers__backtest=1",
+    )
     parser.add_argument("--force", action="store_true", help="bypass every cache check")
     parser.add_argument(
         "--bless",
         action="store_true",
-        help="with the tables stage, write tests/golden.json from the current artifacts",
+        help="with the tables stage, write tests/golden_values.json from the current artifacts",
     )
     args = parser.parse_args(argv)
 
@@ -225,15 +233,23 @@ def main(argv: list[str] | None = None) -> int:
         parser.error("--bless requires the tables stage")
 
     cache.set_force(args.force)
+    overrides: dict[str, object] = {}
+    for item in args.set:
+        key, separator, raw = item.partition("=")
+        if not separator:
+            parser.error("--set expects SECTION__KEY=VALUE")
+        overrides[key] = yaml.safe_load(raw)
     cfg = load_config(args.config)
+    if overrides:
+        cfg = cfg.override(**overrides)
 
     stages = ALL_STAGES if args.stage == "all" else (args.stage,)
     for name in stages:
         STAGES[name](cfg)
 
     if args.bless:
-        hashes = bless_golden(PROCESSED, Path("tests/golden.json"))
-        print(f"Golden hashes blessed: {len(hashes)} artifacts (tests/golden.json).")
+        values = bless_golden_values(PROCESSED, Path("tests/golden_values.json"))
+        print(f"Golden values blessed: {len(values)} artifacts (tests/golden_values.json).")
     return 0
 
 

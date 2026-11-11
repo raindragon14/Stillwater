@@ -2,7 +2,7 @@
 
 from stillwar.reporting.figures import plot_all
 from stillwar.reporting.tables import (
-    bless_golden,
+    bless_golden_values,
     load_blocks,
     render_table1,
     render_table2,
@@ -12,7 +12,7 @@ from stillwar.reporting.tables import (
 )
 
 __all__ = [
-    "bless_golden",
+    "bless_golden_values",
     "load_blocks",
     "plot_all",
     "render_table1",

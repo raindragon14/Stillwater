@@ -1,25 +1,25 @@
 {
   "metadata": {
-    "config_digest": "97eb03ab42ec",
-    "code_digest": "69f55368815632c4",
-    "git_sha": "870f93a21d0f58ab4b65cbcc1d5ade3a90e4b2fe",
-    "git_dirty": false,
+    "config_digest": "5157f21e2092",
+    "code_digest": "c89a6ef2330f3e27",
+    "git_sha": "65f323b4464d529e0326f9df290ee517686524b4",
+    "git_dirty": true,
     "versions": {
       "python": "3.14.4",
       "numpy": "2.5.4",
       "scipy": "1.18.1",
       "torch": "2.15.0+cpu"
     },
-    "created_utc": "2026-11-09T03:42:28Z"
+    "created_utc": "2026-11-11T11:00:24Z"
   },
   "results": {
     "declined": {
       "n_declined": 20.0,
-      "mean_bps": -31.389500773282673,
-      "total_bps": -627.7900154656535,
-      "t": -0.8365911937997332,
-      "p_two_sided": 0.41322111655187144,
-      "p_one_sided": 0.20661055827593572
+      "mean_bps": -31.38841588481562,
+      "total_bps": -627.7683176963124,
+      "t": -0.8365462192707785,
+      "p_two_sided": 0.41324578275744017,
+      "p_one_sided": 0.20662289137872009
     },
     "triggers": {
       "crossing_count": 33,

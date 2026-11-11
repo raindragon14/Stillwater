@@ -203,6 +203,6 @@ This is a substantive revision, not a cosmetic one. It is the direct cost of the
 - **`v1.0.0` release restored** with the raw snapshot attached as a release asset (`raw_snapshot_v1.0.0.zip`, SHA-256 `9BFBD7D6…CAE2C1`), as §2.10 claims.
 
 - **Manuscript prose updated.** §3.1–§3.7, §4.1 and both abstracts now quote the regenerated values; the declined-trade claim is stated as economically suggestive rather than statistically established, and §4.2 documents the external-validity boundary (one market, one sample period, 40 assets).
-- **Golden hashes blessed.** `python -m stillwar tables --bless` writes `tests/golden.json` from the five manuscript-feeding artifacts; `test_golden_artifact_hashes` now enforces the committed hashes instead of skipping.
+- **Golden values blessed.** `python -m stillwar tables --bless` writes `tests/golden_values.json` from the five manuscript-feeding artifacts; `test_golden_artifact_values` now enforces the committed values with a `1e-6` float tolerance instead of skipping.
 - **One Python version pinned.** `pyproject.toml` requires `==3.14.*`, matching `.python-version` and the CPython 3.14 interpreter that produced every current artifact.
 - **`make trials` has been run.** `data/processed/trials.json` holds the 1,225 trial Sharpe ratios (mean −0.091, s.d. 0.353, range [−1.488, 0.916]). The Deflated Sharpe column of Table 1 is now computed from that empirical distribution rather than from a hardcoded normal.

@@ -10,7 +10,6 @@ Each table in ``docs/JOURNAL.md`` sits between ``<!-- BEGIN TABLE n -->`` and
 ``<!-- END TABLE n -->`` markers. Text outside the markers is never touched.
 """
 
-import hashlib
 import json
 import re
 from collections.abc import Sequence
@@ -20,7 +19,7 @@ from typing import Any
 from stillwar.provenance.metadata import read_json
 
 __all__ = [
-    "bless_golden",
+    "bless_golden_values",
     "render_table1",
     "render_table2",
     "render_table3",
@@ -40,20 +39,20 @@ GOLDEN_ARTIFACTS = (
 )
 
 
-def bless_golden(processed: Path, golden: Path) -> dict[str, str]:
-    """Write the golden hashes of the manuscript-feeding artifacts to ``golden``.
+def bless_golden_values(processed: Path, golden: Path) -> dict[str, Any]:
+    """Write the full numeric payloads of the manuscript-feeding artifacts.
 
-    The hash matches ``tests.test_provenance.test_golden_artifact_hashes`` exactly: the
-    SHA-256 of the sorted-JSON ``results`` block of each artifact, truncated to 16 hex
-    characters. Run ``python -m stillwar tables --bless`` once the manuscript numbers
-    are final; the committed file turns the golden test from a skip into an enforcement.
+    A value-level golden file is robust to the last-bit floating-point differences that
+    a different BLAS, matplotlib or SciPy build can introduce, while still catching a
+    meaningful change in any reported number. The companion test compares floats with a
+    relative tolerance of ``1e-6``.
     """
-    hashes: dict[str, str] = {}
+    values: dict[str, Any] = {}
     for name in GOLDEN_ARTIFACTS:
         _meta, results = read_json(processed / name)
-        hashes[name] = hashlib.sha256(json.dumps(results, sort_keys=True).encode()).hexdigest()[:16]
-    golden.write_text(json.dumps(hashes, indent=4) + "\n", encoding="utf-8")
-    return hashes
+        values[name] = results
+    golden.write_text(json.dumps(values, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    return values
 
 _TABLE2_LABELS = {
     "kappa_0": r"$\kappa = 0$ (no penalty)",

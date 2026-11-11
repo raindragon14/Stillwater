@@ -24,7 +24,7 @@ git diff --exit-code data/processed docs/JOURNAL.md
 ```
 
 If a numerical result changes intentionally, update the manuscript prose and re-bless
-the golden hashes:
+the golden values:
 
 ```bash
 uv run python -m stillwar tables --bless

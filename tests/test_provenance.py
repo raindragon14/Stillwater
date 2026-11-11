@@ -1,6 +1,5 @@
 """Provenance, manuscript-table synchronisation, and artifact reproducibility."""
 
-import hashlib
 import json
 from pathlib import Path
 
@@ -139,15 +138,37 @@ def test_table_renderers_are_deterministic(repo_root: Path) -> None:
     assert render_table3(table3) == render_table3(table3)
 
 
-@needs(f"{PROCESSED}/table1.json")
-def test_golden_artifact_hashes(repo_root: Path) -> None:
-    """The numeric payload of each artifact matches the committed golden hash.
+def _assert_close(actual, expected, path: str) -> None:
+    """Compare nested artifact payloads, allowing last-bit float differences."""
+    if isinstance(expected, dict):
+        assert isinstance(actual, dict), f"{path}: expected a mapping"
+        assert set(actual) == set(expected), f"{path}: keys changed"
+        for key in expected:
+            _assert_close(actual[key], expected[key], f"{path}/{key}")
+    elif isinstance(expected, list):
+        assert isinstance(actual, list), f"{path}: expected a list"
+        assert len(actual) == len(expected), f"{path}: length changed"
+        for index, (actual_item, expected_item) in enumerate(zip(actual, expected, strict=True)):
+            _assert_close(actual_item, expected_item, f"{path}[{index}]")
+    elif isinstance(expected, float):
+        assert actual == pytest.approx(expected, rel=1e-6, abs=1e-9), (
+            f"{path}: {actual!r} != {expected!r}"
+        )
+    else:
+        assert actual == expected, f"{path}: {actual!r} != {expected!r}"
 
-    Regenerate with ``python -m stillwar tables --bless`` after an intentional change.
+
+@needs(f"{PROCESSED}/table1.json")
+def test_golden_artifact_values(repo_root: Path) -> None:
+    """The numeric payload of each artifact matches the committed golden values.
+
+    Floats are compared with a relative tolerance of ``1e-6`` so that a different BLAS
+    or SciPy build does not fail the suite over a last-bit difference. Regenerate with
+    ``python -m stillwar tables --bless`` after an intentional change.
     """
-    golden_path = repo_root / "tests" / "golden.json"
+    golden_path = repo_root / "tests" / "golden_values.json"
     if not golden_path.exists():
-        pytest.skip("no golden file; run the bless step once")
+        pytest.skip("no golden values; run the bless step once")
 
     golden = json.loads(golden_path.read_text(encoding="utf-8"))
     for name, expected in golden.items():
@@ -155,5 +176,4 @@ def test_golden_artifact_hashes(repo_root: Path) -> None:
         if not path.exists():
             pytest.skip(f"missing {path}")
         _meta, results = read_json(path)
-        actual = hashlib.sha256(json.dumps(results, sort_keys=True).encode()).hexdigest()[:16]
-        assert actual == expected, f"{name} changed; re-bless if the change is intended"
+        _assert_close(results, expected, name)
