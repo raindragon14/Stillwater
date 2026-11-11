@@ -1,0 +1,34 @@
+# Generated manuscript binaries. docs/JOURNAL.md is the source of truth;
+# the DOCX/PDF are rebuilt from it with the target journal's template.
+/docs/JOURNAL.docx
+/docs/*.docx
+/docs/*.pdf
+
+# Office lock/temporary files
+~$*.docx
+~$*.doc
+~$*.xlsx
+~$*.pptx
+
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+
+# Local pipeline artifacts (code, data and models live in the replication repo)
+data/raw/
+data/processed/
+models/
+.cache/
+reports/
