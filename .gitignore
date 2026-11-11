@@ -44,3 +44,6 @@ Thumbs.db
 desktop.ini
 .idea/
 .vscode/
+
+# Supplementary figures are generated locally; only the two manuscript figures are tracked.
+reports/figures/figS*

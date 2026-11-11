@@ -12,13 +12,13 @@ The repository contains both the empirical pipeline and the paper:
 |:--|:--|
 | [`src/stillwar/`](src/stillwar/) | Modular Python package (data, features, models, optimization, backtest, reporting) |
 | [`docs/JOURNAL.md`](docs/JOURNAL.md) | Complete manuscript; Tables 1–3 are generated from the artifacts |
-| [`docs/EVALUATION.md`](docs/EVALUATION.md) | Audit of the original draft and the corrections applied |
+| [`docs/REVISION_NOTES.md`](docs/REVISION_NOTES.md) | Open author decisions before submission |
 | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Package map, dependency order and invariants |
 | [`docs/REPRODUCIBILITY.md`](docs/REPRODUCIBILITY.md) | What is guaranteed, what changed, and what is outstanding |
 | [`configs/base.yaml`](configs/base.yaml) | Single source of truth for every number |
 | [`data/raw/`](data/raw/) | Archived Yahoo Finance snapshot + SHA-256 manifest |
 | [`data/processed/`](data/processed/) | Provenance-stamped result artifacts (Tables 1–3, KKT log, trials) |
-| [`reports/figures/`](reports/figures/) | Publication figures at 300 DPI |
+| [`reports/figures/`](reports/figures/) | The two manuscript figures; supplementary figures are generated locally and ignored |
 
 ## Quickstart
 
@@ -113,7 +113,7 @@ journal and author metadata are confirmed. Tables 1–3 sit between
 `<!-- BEGIN TABLE n -->` / `<!-- END TABLE n -->` markers and are rewritten by
 `make tables`.
 
-Open author decisions are listed in [`docs/EVALUATION.md`](docs/EVALUATION.md).
+Open author decisions are listed in [`docs/REVISION_NOTES.md`](docs/REVISION_NOTES.md).
 
 ## Optional extras
 
