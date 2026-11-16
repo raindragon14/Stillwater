@@ -8,7 +8,7 @@ URL redirects on GitHub.
 
 ```bash
 git switch main
-git merge --ff-only rebuild          # or open and merge a pull request
+git pull --ff-only                   # single-branch workflow: main only
 uv sync --extra dev
 uv lock --check
 make check                           # ruff + pytest + manuscript check
