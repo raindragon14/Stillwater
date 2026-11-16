@@ -37,6 +37,15 @@ data/processed/*_cache.json
 # Manual thesis/template workspace: edited by hand, never tracked.
 /docs/word/
 
+# Local DOCX template experiments: scratch OOXML dumps and Pandoc test fixtures.
+/tools/pandoc_test.*
+/tools/pandoc_affil_test.*
+/tools/pandoc_frontmatter_test.*
+/tools/caption.xml
+/tools/equation.xml
+/tools/figure_caption.xml
+/tools/table.xml
+
 ~$*.docx
 ~$*.doc
 ~$*.xlsx
