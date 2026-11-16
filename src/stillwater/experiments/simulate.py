@@ -395,7 +395,7 @@ def run_phase4(
     -------
     dict
         Declined-trade statistics, the trigger Herfindahl index, and the decision-regime
-        counts that Figure 2 annotates.
+        counts that Figure 1 annotates.
     """
     ds = load_dataset(cfg)
     loaded = load_panel(cfg)

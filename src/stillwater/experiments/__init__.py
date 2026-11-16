@@ -1,5 +1,6 @@
 """Experiments package: table runs, sensitivity grids and the Deflated-Sharpe trials."""
 
+from stillwater.experiments.equivalence import run_short_circuit_equivalence_experiment
 from stillwater.experiments.sensitivity import (
     run_shrinkage_experiment,
     run_unconstrained_and_tolerance_experiment,
@@ -19,6 +20,7 @@ __all__ = [
     "run_all",
     "run_phase4",
     "run_shrinkage_experiment",
+    "run_short_circuit_equivalence_experiment",
     "run_table1",
     "run_table2",
     "run_table3",

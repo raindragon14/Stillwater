@@ -33,6 +33,10 @@ data/processed/*_cache.json
 /docs/JOURNAL.docx
 /docs/*.docx
 /docs/*.pdf
+
+# Manual thesis/template workspace: edited by hand, never tracked.
+/docs/word/
+
 ~$*.docx
 ~$*.doc
 ~$*.xlsx

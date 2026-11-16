@@ -51,6 +51,8 @@ files must stay consistent. The checks below are cheap; run them before every re
 ## Artifacts
 
 - `data/processed/*.json` — provenance-stamped tables and diagnostics.
+- `data/processed/exp_short_circuit_equivalence.json` — the short-circuit versus
+  full-solve decision agreement behind the claim of Section 2.6 and Appendix A.4.
 - `models/checkpoints/` — frozen per-seed weights.
 - `reports/figures/fig1_kkt_spread.*`, `reports/figures/fig2_trigger_decomposition.*` —
   the two figures used by the manuscript.

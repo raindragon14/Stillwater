@@ -14,9 +14,9 @@ column of ``TEXT_WIDTH_IN = 6.5`` inches, so every figure is drawn at exactly th
 width with an 8 pt base font: what the reader sees on paper is what this module
 draws, with no silent downscaling of the type.
 
-Figure numbering follows the manuscript: ``fig1`` is the architecture schematic,
-``fig2`` the KKT gradient spread, ``fig3`` the trigger decomposition, ``fig4`` the
-sensitivity and extension panels.
+Figure numbering follows the manuscript: ``fig1_kkt_spread`` is Figure 1 and
+``fig2_trigger_decomposition`` is Figure 2; ``figS1_architecture`` and
+``figS2_sensitivity`` are supplementary.
 """
 
 from collections.abc import Sequence
@@ -65,7 +65,7 @@ FORMATS = ("png", "pdf", "svg")
 PALETTE = {
     "blue_main": "#0F4D92",
     "blue_secondary": "#3775BA",
-    "green_1": "#DDF3DE",
+    "green_1": "#CFE8D0",
     "green_2": "#AADCA9",
     "green_3": "#8BCF8B",
     "red_1": "#F6CFCB",
@@ -92,7 +92,7 @@ class FigureStyle:
     font_size: float = 8.0
     axes_linewidth: float = 1.0
     use_tex: bool = False
-    font_family: tuple[str, ...] = ("DejaVu Sans", "Arial", "Helvetica", "sans-serif")
+    font_family: tuple[str, ...] = ("Arial", "Helvetica", "DejaVu Sans", "sans-serif")
 
 
 def apply_publication_style(style: FigureStyle | None = None) -> None:
@@ -103,6 +103,10 @@ def apply_publication_style(style: FigureStyle | None = None) -> None:
         {
             "font.family": "sans-serif",
             "font.sans-serif": [family, "DejaVu Sans"],
+            "mathtext.fontset": "custom",
+            "mathtext.rm": family,
+            "mathtext.it": f"{family}:italic",
+            "mathtext.bf": f"{family}:bold",
             "font.size": style.font_size,
             "axes.titlesize": style.font_size,
             "axes.labelsize": style.font_size,
@@ -213,7 +217,7 @@ def _light_grid(ax: plt.Axes, axis: Literal["x", "y", "both"] = "y") -> None:
 
 
 def plot_architecture(out_path: str | Path = FIG_DIR / "figS1_architecture.png") -> list[Path]:
-    """Draw the end-to-end pipeline schematic (manuscript Figure 1).
+    """Draw the end-to-end pipeline schematic (supplementary Figure S1).
 
     Parameters
     ----------
@@ -318,7 +322,7 @@ def plot_kkt_spread(
     band: float,
     out_path: str | Path = FIG_DIR / "fig1_kkt_spread.png",
 ) -> list[Path]:
-    """Plot the gradient spread against the no-trade band (manuscript Figure 2).
+    """Plot the gradient spread against the no-trade band (manuscript Figure 1).
 
     Interior dates are drawn as markers only. A connecting line would interpolate
     across the 75 cap-drift dates, on which no finite spread exists because
@@ -361,7 +365,15 @@ def plot_kkt_spread(
     ax = fig.add_subplot(grid[0])
     rug = fig.add_subplot(grid[1], sharex=ax)
 
-    ax.axhspan(0.0, band, color=PALETTE["green_1"], zorder=0)
+    ax.axhspan(
+        0.0,
+        band,
+        facecolor=PALETTE["green_1"],
+        edgecolor="#9CC49C",
+        hatch="////",
+        linewidth=0.0,
+        zorder=0,
+    )
     ax.axhline(band, color=PALETTE["red_strong"], ls="--", lw=1.0, zorder=2)
 
     for kind, colour, marker, size, label in (
@@ -391,7 +403,7 @@ def plot_kkt_spread(
     rug.tick_params(axis="y", length=0)
     rug.set_xlabel("Rebalance date (Panel B, weekly decision close)", labelpad=2)
 
-    ax.set_ylabel(r"Gradient spread $\Delta g_t$")
+    ax.set_ylabel(r"Gradient spread $\Delta g_t$ (fraction; 0.02 = 200 bps)")
     ax.tick_params(labelbottom=False)
     tick_idx = list(range(0, len(dates), 16))
     ax.set_xticks(tick_idx)
@@ -400,7 +412,7 @@ def plot_kkt_spread(
     ax.set_ylim(0.0, float(np.nanmax(spreads)) * 1.12)
 
     handles = [
-        Patch(facecolor=PALETTE["green_1"], edgecolor="none", label=f"No-trade band $\\eta_b+\\eta_s={band:.2f}$"),
+        Patch(facecolor=PALETTE["green_1"], edgecolor="#9CC49C", hatch="////", label=f"No-trade band $\\eta_b+\\eta_s={band:.2f}$"),
         Line2D([], [], color=PALETTE["red_strong"], ls="--", lw=1.0, label="No-trade threshold"),
         Line2D([], [], marker="o", ls="none", color=PALETTE["blue_main"], markeredgecolor="black",
                markeredgewidth=0.4, markersize=3.6, label=f"Signal trade ({int((kinds == 'signal_trade').sum())} weeks)"),
@@ -426,7 +438,7 @@ def plot_triggers(
     tickers: Sequence[str],
     out_path: str | Path = FIG_DIR / "fig2_trigger_decomposition.png",
 ) -> list[Path]:
-    """Plot the sector and constituent trigger decomposition (manuscript Figure 3).
+    """Plot the sector and constituent trigger decomposition (manuscript Figure 2).
 
     The caption promises that the bars "decompose extreme sell and buy gradient
     triggers", so each bar is stacked into the sell endpoint (the asset that set
@@ -520,7 +532,7 @@ def plot_sensitivity(
     volatility: dict[str, Any],
     out_path: str | Path = FIG_DIR / "figS2_sensitivity.png",
 ) -> list[Path]:
-    """Plot the three structural extensions (manuscript Figure 4).
+    """Plot the three structural extensions (supplementary Figure S2).
 
     The caption fixes the panel count: (A) cap-drift forced trades against optimal
     KKT holds across the buffer tolerance ``epsilon``, (B) the out-of-sample Sharpe

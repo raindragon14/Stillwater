@@ -26,6 +26,7 @@ ARTIFACTS = (
     "exp_unconstrained_tolerance.json",
     "exp_shrinkage.json",
     "exp_volatility_penalty.json",
+    "exp_short_circuit_equivalence.json",
     "trials.json",
 )
 

@@ -31,7 +31,7 @@ that single edge. `reporting` reads artifacts; it never re-simulates.
 | `stillwater.models` | MSGN/LogSig-Inc/MLP/LSTM, composite loss, deterministic trainer | `architectures.py`, `loss.py`, `trainer.py` |
 | `stillwater.optimization` | Ledoit-Wolf covariance, Theorem 1 KKT test, SLSQP QP | `covariance.py`, `kkt.py`, `qp.py` |
 | `stillwater.backtest` | Execution loop, costs, drift, metrics, statistics | `engine.py`, `metrics.py`, `stats.py` |
-| `stillwater.experiments` | Table 1-3 runs, sensitivity grids, 1,225-trial DSR grid | `simulate.py`, `sensitivity.py`, `trials.py` |
+| `stillwater.experiments` | Table 1-3 runs, sensitivity grids, 1,225-trial DSR grid, short-circuit equivalence | `simulate.py`, `sensitivity.py`, `trials.py`, `equivalence.py` |
 | `stillwater.reporting` | JSON -> Markdown tables, JSON -> figures, manuscript sync | `tables.py`, `figures.py` |
 | `stillwater.provenance` | Artifact metadata, forecast contracts, content-addressed cache | `metadata.py`, `artifacts.py`, `cache.py` |
 | `stillwater.cli` | Stage dispatcher (`python -m stillwater <stage>`) | `cli.py` |

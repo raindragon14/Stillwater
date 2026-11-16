@@ -71,6 +71,7 @@ stages:
       - data/processed/exp_unconstrained_tolerance.json
       - data/processed/exp_shrinkage.json
       - data/processed/exp_volatility_penalty.json
+      - data/processed/exp_short_circuit_equivalence.json
 
   figures:
     cmd: uv run python -m stillwater figures

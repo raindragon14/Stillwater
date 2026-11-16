@@ -22,6 +22,7 @@ import yaml
 
 from stillwater.config import Config, load_config
 from stillwater.data import download, verify_manifest
+from stillwater.experiments.equivalence import run_short_circuit_equivalence_experiment
 from stillwater.experiments.sensitivity import (
     run_shrinkage_experiment,
     run_unconstrained_and_tolerance_experiment,
@@ -142,17 +143,18 @@ def stage_simulate(cfg: Config) -> int:
 
 
 def stage_experiments(cfg: Config) -> int:
-    """Run the three structural extensions of Section 3.7."""
+    """Run the structural extensions of Section 3.7 and the short-circuit check."""
     inputs = _forecast_inputs()
     if cache.is_fresh("experiments", cfg, _EXPERIMENT_DEPS, inputs):
         _skip("experiments")
         return 0
-    forecasts, _ = load_all(cfg, PROCESSED)
+    forecasts, baselines = load_all(cfg, PROCESSED)
     logsig = forecasts["logsig"]
     run_unconstrained_and_tolerance_experiment(cfg, logsig)
     run_shrinkage_experiment(cfg, logsig)
     run_volatility_penalty_experiment(cfg, logsig)
-    print("Structural extensions written.")
+    run_short_circuit_equivalence_experiment(cfg, forecasts, baselines)
+    print("Structural extensions and short-circuit equivalence written.")
     cache.mark_done("experiments", cfg, _EXPERIMENT_DEPS, inputs)
     return 0
 

@@ -165,7 +165,7 @@ def run_backtest(
 
     Notes
     -----
-    The KKT log is the single source of truth for Table 3 and Figure 2. A hold date
+    The KKT log is the single source of truth for Table 3 and Figure 1. A hold date
     sends no order: ``C_{t+1} = 0`` and holdings keep drifting through the holding
     window. A cap-drift date lies outside Theorem 1's assumptions and always solves.
     """

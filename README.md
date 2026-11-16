@@ -59,7 +59,7 @@ make test
 | `train` | Train LogSig, LogSig-Inc, MLP and LSTM across five pinned seeds |
 | `baselines` | Build the Hist-MV and GMV forecast arrays |
 | `simulate` | Produce Tables 1–3, the KKT log and the Phase-4 diagnostics |
-| `experiments` | Run the structural extensions (cap-drift buffer, shrinkage, volatility-scaled penalties) |
+| `experiments` | Run the structural extensions (cap-drift buffer, shrinkage, volatility-scaled penalties) and the short-circuit equivalence check |
 | `trials` | Evaluate the 1,225 Deflated-Sharpe configurations (about 20 min) |
 | `figures` | Render the manuscript figures |
 | `tables` | Regenerate Tables 1–3 and sync `docs/JOURNAL.md` |

@@ -3,7 +3,7 @@
 The invariant of this module is that it returns **only numbers**. No percentages, no
 ``"±"``, no rounding, no file I/O. Formatting belongs to :mod:`stillwater.reporting.tables` and
 :mod:`stillwater.reporting.figures`, and keeping the two apart is what lets
-``tests/test_manuscript_tables.py`` regenerate a manuscript table and compare it
+``tests/test_provenance.py`` regenerate a manuscript table and compare it
 against the committed one cell by cell.
 
 Every function here has a producer in the pipeline; nothing is computed for its own
@@ -167,7 +167,7 @@ def declined_trade_test(
 def trigger_concentration(kkt_logs: Sequence[KKTLog], tickers: Sequence[str]) -> dict[str, Any]:
     """Which constituents and sectors set the extreme gradients on band-crossing dates.
 
-    Feeds Figure 3 and the Herfindahl statistics of Section 3.5. Each crossing date
+    Feeds Figure 2 and the Herfindahl statistics of Section 3.5. Each crossing date
     contributes two triggers, one sell endpoint and one buy endpoint.
 
     Parameters
@@ -224,7 +224,7 @@ def trigger_concentration(kkt_logs: Sequence[KKTLog], tickers: Sequence[str]) ->
 def trigger_endpoints(kkt_logs: Sequence[KKTLog], tickers: Sequence[str]) -> dict[str, Any]:
     """Split the extreme-gradient endpoints into sell and buy triggers.
 
-    Feeds Figure 3, whose caption promises that the bars "decompose extreme sell
+    Feeds Figure 2, whose caption promises that the bars "decompose extreme sell
     and buy gradient triggers". :func:`trigger_concentration` counts the two
     endpoints together, which is the right input for a Herfindahl index but the
     wrong one for a stacked bar: a sector can be a net seller of risk and a net

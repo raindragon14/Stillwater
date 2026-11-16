@@ -65,7 +65,7 @@ _TABLE2_LABELS = {
     "gamma_10": r"$\gamma = 10$",
     "m_0.5": r"$m = 0.5$",
     "m_2": r"$m = 2$",
-    "non_inclusive": r"Non-inclusive costs ($c_{b} = 0.001933$, $c_{s} = 0.002933$)",
+    "non_inclusive": r"Non-inclusive costs",
 }
 
 _TABLE1_ORDER = (
@@ -146,7 +146,7 @@ def render_table1(table: dict[str, Any]) -> str:
         A GitHub-flavoured Markdown table, without the caption.
     """
     lines = [
-        "| Strategy | Net CAGR | Sharpe | MDD | Turnover | Rank IC | NW alpha vs EW | Deflated Sharpe |",
+        "| Strategy | Net CAGR (%) | Sharpe | MDD (%) | Turnover (%) | Rank IC | NW alpha vs EW | Deflated Sharpe |",
         "|:---|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for panel, title in (("panel_a", "**Panel A (test 2024–2025)**"), ("panel_b", "**Panel B (full out-of-sample, incl. the 2026 continuation)**")):
@@ -184,7 +184,7 @@ def render_table2(rows: Sequence[dict[str, Any]]) -> str:
         A GitHub-flavoured Markdown table.
     """
     lines = [
-        r"| Setting | Net CAGR | Sharpe | MDD | Turnover | $\psi_{\kappa}$ | $\psi_{\kappa}^{0}$ |",
+        r"| Setting | Net CAGR (%) | Sharpe | MDD (%) | Turnover (%) | $\psi_{\kappa}$ | $\psi_{\kappa}^{0}$ |",
         "|:---|---:|---:|---:|---:|---:|---:|",
     ]
     for row in rows:

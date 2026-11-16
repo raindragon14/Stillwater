@@ -280,7 +280,7 @@ def run_volatility_penalty_experiment(
 
     Replaces the uniform band with ``eta_i proportional to sigma_i / mean(sigma)`` and
     measures whether trigger concentration falls. Trigger statistics are reported for
-    the primary seed, matching the manuscript's Figure 3.
+    the primary seed, matching the manuscript's Figure 2.
 
     Parameters
     ----------
