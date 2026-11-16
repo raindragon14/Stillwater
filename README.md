@@ -3,10 +3,32 @@
 > **When the Optimizer Refuses to Trade: A KKT No-Trade Zone and Lévy-Area Signal
 > Activation under Weak Signals in LQ45 Equities**
 
+[![ci](https://github.com/raindragon14/Stillwater/actions/workflows/ci.yml/badge.svg)](https://github.com/raindragon14/Stillwater/actions/workflows/ci.yml)
+
 Reproducible code and manuscript. Muhammad Reihan Pandanarang —
 Mathematics Department, Universitas Negeri Semarang.
 
 **Status:** research code, v2.0.0. Not production trading software.
+
+## What the paper shows
+
+The paper asks how a weak, learned return signal crosses a no-trade band into actual
+trades for 40 LQ45 stocks. The headline results:
+
+- The explicit no-trade test derived from the KKT conditions agrees with the QP solver
+  on **100% of the 53 interior feasible rebalance dates** (33 trades, 20 holds); the
+  other 75 dates are forced rebalances because price drift pushes a holding above the
+  15% cap.
+- The **20 declined trades** would have lost **31.39 basis points per week**
+  (627.77 bp cumulatively) after costs, but the effect is not statistically significant
+  (two-sided t = −0.84, p = 0.413).
+- The ensemble rank IC is **0.0332** (one-sided p = 0.0331): the signal is weak but not
+  absent.
+- The defense against the weak signal is structural: **the cost band read from the KKT
+  conditions, not the forecast, decides when to trade.**
+
+The full argument is in [`docs/JOURNAL.md`](docs/JOURNAL.md); every number above is
+regenerated from the committed artifacts by the pipeline.
 
 The repository contains both the empirical pipeline and the paper:
 
@@ -30,9 +52,9 @@ uv run python -m stillwater verify
 make all                     # verify -> features -> train -> baselines -> simulate -> experiments -> figures -> tables -> test
 ```
 
-`make all` is content-addressed: a second run on an unchanged tree is fast. Use
-`make all FORCE=1` to recompute every stage. The 1,225-trial Deflated-Sharpe grid is
-separate and expensive:
+`make all` is content-addressed: the first run trains four models across five seeds on
+CPU, and a second run on an unchanged tree is fast. Use `make all FORCE=1` to recompute
+every stage. The 1,225-trial Deflated-Sharpe grid is separate and expensive:
 
 ```bash
 make trials                  # about 20 minutes, once
@@ -49,6 +71,24 @@ make check                   # ruff + pytest + manuscript structural check
 make lint
 make test
 ```
+
+## Verify the paper
+
+The result artifacts are committed, so every table can be regenerated without
+retraining:
+
+```bash
+uv sync --extra dev
+uv run python -m stillwater verify   # raw snapshot matches data/raw/manifest.sha256
+make tables                          # rebuild Tables 1-3 into docs/JOURNAL.md
+git diff --exit-code docs/JOURNAL.md # the regenerated tables must be unchanged
+```
+
+`make figures` regenerates the two manuscript figures from the same artifacts (PNG
+bytes can differ across matplotlib/font builds even when the plotted data are
+identical). `make check` runs lint, the full test suite and the manuscript structural
+check; CI runs the same gates plus a feature build and the table-sync check on every
+push.
 
 ## Pipeline stages
 
@@ -109,9 +149,10 @@ compatibility modules left.
 
 ## Manuscript
 
-The manuscript is Markdown, not Word-first. `docs/JOURNAL.docx` is a generated artifact
-and is ignored by Git; regenerate it with the target journal's template after the
-journal and author metadata are confirmed. Tables 1–3 sit between
+The manuscript is Markdown, not Word-first, and is written in Indonesian with an
+English abstract. `docs/JOURNAL.docx` is a generated artifact and is ignored by Git;
+regenerate it with the target journal's template after the journal and author metadata
+are confirmed. Tables 1–3 sit between
 `<!-- BEGIN TABLE n -->` / `<!-- END TABLE n -->` markers and are rewritten by
 `make tables`.
 
@@ -135,12 +176,16 @@ Open author decisions are listed in [`docs/REVISION_NOTES.md`](docs/REVISION_NOT
 - Release checklist: [`docs/RELEASE.md`](docs/RELEASE.md)
 - Security policy: [`SECURITY.md`](SECURITY.md)
 - Code of conduct: [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md)
+- Contributing: [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
 ## Citation
 
-See [`CITATION.cff`](CITATION.cff). The code release is archived at
-[`raindragon14/Stillwater`](https://github.com/raindragon14/Stillwater).
+See [`CITATION.cff`](CITATION.cff). The code is hosted at
+[`raindragon14/Stillwater`](https://github.com/raindragon14/Stillwater); a Zenodo DOI
+will be added when the release is archived.
 
 ## License
 
-MIT. See [`LICENSE`](LICENSE).
+The code is MIT-licensed; see [`LICENSE`](LICENSE). The archived Yahoo Finance snapshot
+in `data/raw/` is included only so the published results can be reproduced.
+
